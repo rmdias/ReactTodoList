@@ -7,7 +7,7 @@ class TasksList extends Component {
   // }
   render() {
     const block =
-      <ul className="tasksList">
+      <ul className="tasks__list">
         <Task />
       </ul>;
     return block;

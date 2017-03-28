@@ -9,7 +9,7 @@ class TodoListHeader extends Component {
   // }
   render() {
     const block =
-      <header className="todo-listHeader">
+      <header className="todo-list__header">
         <h1 className="todo-list__title">React Todo List</h1>
         <form className="search__form">
           <h2>Search</h2>

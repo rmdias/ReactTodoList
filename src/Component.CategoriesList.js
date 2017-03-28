@@ -8,7 +8,7 @@ class CategoriesList extends Component {
   // }
   render() {
     const block =
-      <ul className="categoriesList">
+      <ul className="categories__list">
         <Category />
       </ul>;
     return block;
