@@ -25,14 +25,13 @@ class Tasks extends Component {
             action="submit"
             block="tasks"
             element="submit"
-            id="0"
             label="Add" />
 
         </form>
       </header>
       <div className="tasks__content">
         <h3 className="tasks__title">Categories List</h3>
-        <TasksList />
+        <TasksList tasks={this.props.tasks} />
       </div>
     </section>;
     return block;

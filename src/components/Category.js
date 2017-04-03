@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import FormCheckbox from './FormCheckbox';
 import FormButton from './FormButton';
+import CategoriesList from './CategoriesList';
 
 
 class Category extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.categoriesList = this.props.category.categories || [];
+    this.id = this.props.category.id;
+    this.name = this.props.category.name;
+  }
   render() {
+    const categories = <CategoriesList categories={this.categoriesList} />;
     const block =
       <li className="category">
         <FormCheckbox
-          id="0"
+          id={this.id}
           block="category"
           element="name"
-          label="Category name" />
+          label={this.props.category.name} />
 
         <FormButton
           action="edit"
           block="category"
           element="edit"
-          id="0"
+          id={this.id}
           label="Edit"
           type="link" />
 
@@ -28,7 +33,7 @@ class Category extends Component {
           action="delete"
           block="category"
           element="delete"
-          id="0"
+          id={this.id}
           label="Delete"
           type="link" />
 
@@ -36,11 +41,14 @@ class Category extends Component {
           action="submit"
           block="category"
           element="submit"
-          id="0"
+          id={this.id}
           label="Add"
           type="link" />
 
+          {categories}
+
       </li>;
+
     return block;
   }
 }

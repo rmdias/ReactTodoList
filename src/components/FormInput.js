@@ -21,6 +21,7 @@ class FormInput extends Component {
         className={`${bemLabel} form__label`}
         htmlFor={inputId}>{label}</label>
       <input
+        onChange={this.props.onChange}
         className={`${bemInput} form__input--text`}
         id={inputId}
         placeholder={placeholder}

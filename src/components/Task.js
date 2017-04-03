@@ -12,9 +12,9 @@ class Task extends Component {
       <li className="task">
         <FormCheckbox
           block="task"
-          element="done"
+          element="description"
           id="0"
-          label="Task description name" />
+          label="Task description" />
 
         <FormButton
           action="edit"
