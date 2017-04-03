@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import TodoListHeader from './Component.TodoListHeader';
-import TodoListContent from './Component.TodoListContent';
+import TodoListHeader from './comonents/TodoListHeader';
+import TodoListContent from './components/TodoListContent';
+import './TodoList.css';
 
 class TodoList extends Component {
   // constructor(props) {

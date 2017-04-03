@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import FormCheckbox from './Component.FormCheckbox';
-import FormButton from './Component.FormButton';
+import FormCheckbox from './FormCheckbox';
+import FormButton from './FormButton';
 
 
-class Task extends Component {
+class Category extends Component {
   // constructor(props) {
   //   super(props);
   // }
   render() {
     const block =
-      <li className="task">
+      <li className="category">
         <FormCheckbox
-          block="task"
-          element="done"
           id="0"
-          label="Task description name" />
+          block="category"
+          element="name"
+          label="Category name" />
 
         <FormButton
           action="edit"
-          block="task"
+          block="category"
           element="edit"
           id="0"
           label="Edit"
@@ -26,10 +26,18 @@ class Task extends Component {
 
         <FormButton
           action="delete"
-          block="task"
+          block="category"
           element="delete"
           id="0"
           label="Delete"
+          type="link" />
+
+        <FormButton
+          action="submit"
+          block="category"
+          element="submit"
+          id="0"
+          label="Add"
           type="link" />
 
       </li>;
@@ -37,4 +45,4 @@ class Task extends Component {
   }
 }
 
-export default Task;
+export default Category;

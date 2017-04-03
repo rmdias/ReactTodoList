@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Categories from './Component.Categories';
-import Tasks from './Component.Tasks';
+import Categories from './Categories';
+import Tasks from './Tasks';
 
 class TodoListContent extends Component {
   // constructor(props) {
@@ -8,7 +8,7 @@ class TodoListContent extends Component {
   // }
   render() {
     const block =
-      <div class="todo-listContent">
+      <div className="todo-listContent">
         <Categories />
         <Tasks />
       </div>;

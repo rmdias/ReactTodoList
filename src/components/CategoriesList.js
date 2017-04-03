@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Category from './Component.Category';
+import Category from './Category';
 
 
 class CategoriesList extends Component {

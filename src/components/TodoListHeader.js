@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FormCheckbox from './Component.FormCheckbox';
-import FormInput from './Component.FormInput';
-import FormButton from './Component.FormButton';
+import FormCheckbox from './FormCheckbox';
+import FormInput from './FormInput';
+import FormButton from './FormButton';
 
 class TodoListHeader extends Component {
   // constructor(props) {

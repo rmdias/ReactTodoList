@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FormInput from './Component.FormInput';
-import FormButton from './Component.FormButton';
-import TasksList from './Component.TasksList';
+import FormInput from './FormInput';
+import FormButton from './FormButton';
+import TasksList from './TasksList';
 
 
 class Tasks extends Component {
