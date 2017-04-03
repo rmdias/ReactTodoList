@@ -14,7 +14,7 @@ class Tasks extends Component {
       <header className="tasks__header">
         <h2 className="tasks__title">Tasks</h2>
         <form action="" className="tasks__create">
-          <h3>Create Task</h3>
+          <h3 className="tasks__sub-title">Create Task</h3>
 
           <FormInput
             block="tasks"
@@ -26,8 +26,7 @@ class Tasks extends Component {
             block="tasks"
             element="submit"
             id="0"
-            label="Add"
-            type="link" />
+            label="Add" />
 
         </form>
       </header>

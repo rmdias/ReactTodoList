@@ -1,5 +1,188 @@
-@import '../node_modules/foundation-sites/scss/foundation';
+@import "../node_modules/bourbon/app/assets/stylesheets/bourbon";
+
+.form__input {
+  label {
+    display: none;
+  }
+}
+
+h2, h3 {
+  display: none;
+}
+
+#app, .todo-list {
+  @include size(100%);
+  @include position(absolute, 0 null null 0);
+}
 
 .todo-list {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__title {
+
+  }
+
+  &__progress {
+    flex-basis: 100%;
+  }
+
+  &__content {
+    display: flex;
+  }
+}
+.search {
+  &__form {
+    flex-grow: 1;
+
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
+  &__title {
+  }
+
+  &__done {
+    &-checkbox {
+    }
+
+    &-label {
+    }
+  }
+
+
+  &__query {
+    &-label {
+    }
+
+    &-input {
+    }
+
+    &-submit-button {
+    }
+
+    &-reset-button {
+    }
+  }
+
+}
+
+
+.categories {
+  &__header {
+  }
+
+  &__title {
+  }
+
+  &__create {
+  }
+
+  &__sub-title {
+  }
+
+  &__create {
+    @extend .form__input;
+
+    &-label {
+    }
+
+    &-input {
+    }
+
+    &-submit-button {
+    }
+  }
+
+  &__content {
+  }
+
+  &__title {
+  }
+
+  &__list {
+  }
+}
+
+
+.category {
+  &__name {
+    &-checkbox {
+    }
+
+    &-label {
+    }
+  }
+
+
+  &__edit-button {
+  }
+
+  &__delete-button {
+  }
+
+  &__submit-button {
+  }
+}
+
+
+.tasks {
+  &__header {
+  }
+
+  &__title {
+  }
+
+  &__create {
+    &-label {
+    }
+
+    &-input {
+    }
+  }
+
+  &__sub-title {
+  }
+
+  &__create {
+    @extend .form__input;
+  }
+
+  &__submit-button {
+  }
+
+  &__content {
+  }
+
+  &__title {
+  }
+
+  &__list {
+  }
+}
+
+
+.task {
+  &__done {
+    &-checkbox {
+    }
+
+    &-label {
+    }
+  }
+
+
+  &__edit-button {
+  }
+
+  &__delete-button {
+  }
 }

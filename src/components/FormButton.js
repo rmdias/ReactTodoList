@@ -18,14 +18,15 @@ class FormButton extends Component {
 
     if(this.props.type === 'link') {
       return <a
-               className={bemButton}
+               className={`${bemButton} form__button--link`}
                href={href}
                id={id}>{label}</a>
     } else {
 
       var inputType = this.props.action || 'button';
+
       return <input
-               className={bemButton}
+               className={`${bemButton} form__button`}
                id={id}
                name={this.props.action}
                type={inputType}

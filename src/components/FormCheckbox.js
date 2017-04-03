@@ -19,13 +19,13 @@ class FormCheckbox extends Component {
       <span className={bem}>
         <input
           checked={this.props.checked}
-          className={bemCheckbox}
+          className={`${bemCheckbox} form__input--checkbox`}
           id={checkboxId}
           type='checkbox' />
 
         <label
           htmlFor={checkboxId}
-          className={bemLabel}>
+          className={`${bemLabel} form__label`}>
           {this.props.label}
         </label>
       </span>

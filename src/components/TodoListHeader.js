@@ -12,7 +12,7 @@ class TodoListHeader extends Component {
       <header className="todo-list__header">
         <h1 className="todo-list__title">React Todo List</h1>
         <form className="search__form">
-          <h2>Search</h2>
+          <h2 className="search__title">Search</h2>
           <FormCheckbox
             block="search"
             element="done"

@@ -14,7 +14,7 @@ class Categories extends Component {
         <header className="categories__header">
           <h2 className="categories__title">Categories</h2>
           <form action="" className="categories__create">
-            <h3>Create Category</h3>
+            <h3 className="categories__sub-title">Create Category</h3>
 
             <FormInput
               block="categories"

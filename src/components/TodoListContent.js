@@ -8,7 +8,7 @@ class TodoListContent extends Component {
   // }
   render() {
     const block =
-      <div className="todo-listContent">
+      <div className="todo-list__content">
         <Categories />
         <Tasks />
       </div>;

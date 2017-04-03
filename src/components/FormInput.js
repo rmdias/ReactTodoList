@@ -18,10 +18,10 @@ class FormInput extends Component {
 
     const block = (<span className={bem}>
       <label
-        className={bemLabel}
+        className={`${bemLabel} form__label`}
         htmlFor={inputId}>{label}</label>
       <input
-        className={bemInput}
+        className={`${bemInput} form__input--text`}
         id={inputId}
         placeholder={placeholder}
         type='text'
