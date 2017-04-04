@@ -189,13 +189,18 @@ input[type=checkbox] {
     padding: 0;
 
     & & {
+      display: none;
       flex-basis: 100%;
+    }
+
+    & .category--selected & {
+      display: flex;
     }
   }
 }
 
 
-.category {
+.category, .category--selected {
 
   & {
     list-style-type: none;
@@ -209,18 +214,19 @@ input[type=checkbox] {
     height: 3em;
     justify-content: flex-end;
     padding: 0 1em;
+    cursor: pointer;
 
     &:hover {
       background-color: #efefef;
     }
 
     .form__button--link {
-      display: none;
+      visibility: hidden;
       margin-left: 0.5em;
     }
 
     &:hover .form__button--link {
-      display: inline;
+      visibility: visible;
     }
   }
 

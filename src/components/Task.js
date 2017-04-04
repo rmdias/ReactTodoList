@@ -8,13 +8,15 @@ class Task extends Component {
   //   super(props);
   // }
   render() {
+
     const block =
       <li className="task">
         <FormCheckbox
           block="task"
+          checked={this.props.done}
           element="description"
           id="0"
-          label="Task description" />
+          label={this.props.description} />
 
         <FormButton
           action="edit"

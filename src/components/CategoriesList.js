@@ -3,17 +3,18 @@ import Category from './Category';
 
 
 class CategoriesList extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
 
-  componentWillMount() {
-    const categories = this.props.categories;
-    this.categoriesList = categories.map(this.createCategory);
+    this.createCategory = this.createCategory.bind(this);
   }
 
   createCategory(categoryObject, index) {
+    const isSelected = categoryObject === this.props.selectedCategory;
     const block = <Category
+      actions={this.props.actions}
+      isSelected={isSelected}
+      selectedCategory={this.props.selectedCategory}
       key={categoryObject.id}
       id={categoryObject.id}
       category={categoryObject} />;
@@ -21,7 +22,11 @@ class CategoriesList extends Component {
   }
 
   render() {
-    const block = <ul className="categories__list">{this.categoriesList}</ul>;
+
+    const categoriesList = this.props.categories.map(this.createCategory);
+    const block = <ul className="categories__list">
+      {categoriesList}
+    </ul>;
     return block;
   }
 }

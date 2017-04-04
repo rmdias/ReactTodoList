@@ -50,7 +50,7 @@ class Categories extends Component {
               element="create-input"
               onChange={this.onTypeNewCategory}
               value={this.state.newCategoryName}
-              label="Enter category title" />
+              label="Add new category" />
 
             <FormButton
               action="submit"
@@ -62,7 +62,11 @@ class Categories extends Component {
         </header>
         <div className="categories__content">
           <h3 className="categories__title">Categories List</h3>
-          <CategoriesList categories={this.props.categories} />
+          <CategoriesList
+            actions={this.props.actions}
+            categories={this.props.categories}
+            selectedCategory={this.props.selectedCategory}
+          />
         </div>
       </section>;
     return block;

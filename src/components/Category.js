@@ -9,17 +9,30 @@ class Category extends Component {
     this.categoriesList = this.props.category.categories || [];
     this.id = this.props.category.id;
     this.name = this.props.category.name;
+    this.onContentClick = this.onContentClick.bind(this);
 
+
+  }
+
+  onContentClick(event) {
+    const wasTitle = event.target.tagName !== "A"
+    if(wasTitle) {
+      this.props.actions.selectCategory(this.props.category);
+    }
   }
 
 
   render() {
-    const categories = <CategoriesList categories={this.categoriesList} />;
+    const isSelected = this.props.category === this.props.selectedCategory;
+    const categoryClassName = isSelected ? 'category--selected' : 'category'
+
+    const categories = <CategoriesList
+      actions={this.props.actions}
+      categories={this.categoriesList}
+    />;
     const block =
-      <li className="category">
-
-          <div className="category__content">
-
+      <li className={categoryClassName}>
+          <div className="category__content" onClick={this.onContentClick}>
             <span className="category__name">{this.props.category.name}</span>
 
             <FormButton

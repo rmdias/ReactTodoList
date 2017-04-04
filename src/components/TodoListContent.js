@@ -3,26 +3,24 @@ import Categories from './Categories';
 import Tasks from './Tasks';
 
 class TodoListContent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.tasks = [];
-    this.state = {
-      tasks: this.tasks
-    }
-  }
-
-  setTasks(tasks) {
-    this.setState({
-      tasks: tasks
-    })
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
+
     const block =
       <div className="todo-list__content">
-        <Categories setTasks={this.setTasks} categories={this.props.todoList.categories} />
-        <Tasks tasks={this.state.tasks} />
+        <Categories
+          actions={this.props.actions}
+          selectedCategory={this.props.selectedCategory}
+          categories={this.props.todoList.categories} />
+
+
+        <Tasks
+          actions={this.props.actions} 
+          selectedCategory={this.props.selectedCategory}
+        />
       </div>;
     return block;
   }

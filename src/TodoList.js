@@ -8,10 +8,13 @@ class TodoList extends Component {
     super(props);
 
     this.onSearch = this.onSearch.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
+
 
     this.state = {
       query: "",
-      todoList: this.props.todoList
+      todoList: this.props.todoList,
+      selectedCategory: null,
     };
   }
 
@@ -19,18 +22,26 @@ class TodoList extends Component {
     this.setState({
       query: query
     });
-    // console.log("Searching for", this.state.query);
+  }
+
+  selectCategory(category) {
+    this.setState({
+      selectedCategory: category
+    });
   }
 
   render() {
     const actions = {
-      search: this.onSearch
+      search: this.onSearch,
+      selectCategory: this.selectCategory
     }
-
     const block =
       <div className="todo-list">
         <TodoListHeader actions={actions} query={this.state.search} />
-        <TodoListContent todoList={this.state.todoList} />
+        <TodoListContent
+          actions={actions}
+          selectedCategory={this.state.selectedCategory}
+          todoList={this.state.todoList} />
       </div>;
     return block;
   }
@@ -46,7 +57,7 @@ TodoList.defaultProps = {
           {
             id: "task-1",
             description: "Pay taxes",
-            done: false,
+            done: true,
           },
           {
             id: "task-2",
@@ -68,7 +79,7 @@ TodoList.defaultProps = {
               {
                 id: "task-4",
                 description: "Throw garbage away",
-                done: false
+                done: true
               }
             ]
           }

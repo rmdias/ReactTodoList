@@ -62,7 +62,9 @@ class Tasks extends Component {
       </header>
       <div className="tasks__content">
         <h3 className="tasks__title">Categories List</h3>
-        <TasksList tasks={this.props.tasks} />
+        <TasksList 
+          selectedCategory={this.props.selectedCategory}
+          tasks={this.props.tasks} />
       </div>
     </section>;
     return block;
