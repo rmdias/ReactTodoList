@@ -6,18 +6,30 @@ import './TodoList.css';
 class TodoList extends Component {
   constructor(props) {
     super(props);
+
+    this.onSearch = this.onSearch.bind(this);
+
     this.state = {
-      search: {
-        showDone: false,
-        query: ""
-      },
+      query: "",
       todoList: this.props.todoList
     };
   }
+
+  onSearch(query) {
+    this.setState({
+      query: query
+    });
+    // console.log("Searching for", this.state.query);
+  }
+
   render() {
+    const actions = {
+      search: this.onSearch
+    }
+
     const block =
       <div className="todo-list">
-        <TodoListHeader search={this.state.search} />
+        <TodoListHeader actions={actions} query={this.state.search} />
         <TodoListContent todoList={this.state.todoList} />
       </div>;
     return block;
@@ -30,7 +42,6 @@ TodoList.defaultProps = {
       {
         id: "cat-1",
         name: "Home",
-        show: false,
         tasks: [
           {
             id: "task-1",
@@ -48,7 +59,6 @@ TodoList.defaultProps = {
           {
             id: "cat-1-1",
             name: "Kitchen",
-            show: false,
             tasks: [
               {
                 id: "task-3",
@@ -67,7 +77,6 @@ TodoList.defaultProps = {
       {
         id: "cat-2",
         name: "Office",
-        show: false,
         tasks: [
           {
             id: "task-5",
@@ -85,7 +94,6 @@ TodoList.defaultProps = {
           {
             id: "cat-2-1",
             name: "Desktop",
-            show: false,
             tasks: [
               {
                 id: "task-7",

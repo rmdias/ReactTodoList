@@ -1,13 +1,22 @@
 @import "../node_modules/bourbon/app/assets/stylesheets/bourbon";
 
-.form__input {
-  label {
-    display: none;
-  }
-}
 
 h2, h3 {
   display: none;
+}
+// label {
+//   display: none;
+// }
+input[type=text] {
+  border: 0;
+  height: 3em;
+  outline: none;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+input[type=checkbox] {
+  margin-right: 0.5em;
 }
 
 #app, .todo-list {
@@ -15,19 +24,28 @@ h2, h3 {
   @include position(absolute, 0 null null 0);
 }
 
+
+
 .todo-list {
   display: flex;
   flex-direction: column;
 
 
   &__header {
+    // padding: 30px;
+    align-items: stretch;
+    border-bottom: 1px solid #efefef;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
   }
 
   &__title {
-
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    margin: 0;
+    height: 2em;
+    padding-left: 0.5em;
   }
 
   &__progress {
@@ -36,21 +54,25 @@ h2, h3 {
 
   &__content {
     display: flex;
+    flex-grow: 1;
   }
 }
+
 .search {
   &__form {
-    flex-grow: 1;
-
     display: flex;
+    flex-direction: column;
+    flex-grow: 0;
     justify-content: flex-end;
-
+    align-items: center;
   }
 
   &__title {
   }
 
   &__done {
+    display: none;
+
     &-checkbox {
     }
 
@@ -60,23 +82,72 @@ h2, h3 {
 
 
   &__query {
+    flex-grow: 1;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+
+
     &-label {
+      display: none;
     }
 
     &-input {
+      flex-grow: 1;
     }
 
     &-submit-button {
+      display: none;
     }
 
     &-reset-button {
+      display: none;
     }
   }
 
 }
 
 
+@mixin todo-list__section-header() {
+
+  &__header {
+    border-bottom: 1px solid #efefef;
+  }
+
+  &__create {
+
+    &-form {
+      background-color: red;
+      display: flex;
+    }
+
+    &-input-label {
+      display: none;
+    }
+
+    &-input {
+      flex-grow: 1;
+      display: flex;
+
+      &-input {
+        flex-grow: 1;
+        outline: none;
+      }
+    }
+
+    &-submit-button {
+      display: none;
+    }
+  }
+}
+
 .categories {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #efefef;
+
+  @include todo-list__section-header();
+
   &__header {
   }
 
@@ -90,7 +161,9 @@ h2, h3 {
   }
 
   &__create {
-    @extend .form__input;
+
+    &-form {
+    }
 
     &-label {
     }
@@ -103,38 +176,67 @@ h2, h3 {
   }
 
   &__content {
+    flex-grow: 1;
   }
 
   &__title {
   }
 
   &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    & & {
+      flex-basis: 100%;
+    }
   }
 }
 
 
 .category {
+
+  & {
+    list-style-type: none;
+  }
+
+
+  &__content {
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    height: 3em;
+    justify-content: flex-end;
+    padding: 0 1em;
+
+    &:hover {
+      background-color: #efefef;
+    }
+
+    .form__button--link {
+      display: none;
+      margin-left: 0.5em;
+    }
+
+    &:hover .form__button--link {
+      display: inline;
+    }
+  }
+
   &__name {
-    &-checkbox {
-    }
-
-    &-label {
-    }
-  }
-
-
-  &__edit-button {
-  }
-
-  &__delete-button {
-  }
-
-  &__submit-button {
+    flex-grow: 1;
+    font-weight: bold;
   }
 }
 
-
 .tasks {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @include todo-list__section-header();
+
   &__header {
   }
 
@@ -153,13 +255,14 @@ h2, h3 {
   }
 
   &__create {
-    @extend .form__input;
+
   }
 
   &__submit-button {
   }
 
   &__content {
+    flex-grow: 1;
   }
 
   &__title {

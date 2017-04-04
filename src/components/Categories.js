@@ -9,8 +9,8 @@ class Categories extends Component {
     super(props);
 
     this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       newCategoryName: ""
     };
@@ -24,7 +24,7 @@ class Categories extends Component {
     // console.log('newCategoryName',newCategoryName);
   }
 
-  handleSubmit(event) {
+  onSubmit(event) {
     this.createNewCategory(this.state.newCategoryName);
   }
 
@@ -42,12 +42,12 @@ class Categories extends Component {
       <section className="categories">
         <header className="categories__header">
           <h2 className="categories__title">Categories</h2>
-          <form action="" onSubmit={this.handleSubmit} className="categories__create">
+          <form action="" onSubmit={this.onSubmit} className="categories__create-form">
             <h3 className="categories__sub-title">Create Category</h3>
 
             <FormInput
               block="categories"
-              element="create"
+              element="create-input"
               onChange={this.onTypeNewCategory}
               value={this.state.newCategoryName}
               label="Enter category title" />
