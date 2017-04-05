@@ -13,13 +13,16 @@ class TodoListContent extends Component {
       <div className="todo-list__content">
         <Categories
           actions={this.props.actions}
+          categories={this.props.todoList.categories}
+          query={this.props.query}
           selectedCategory={this.props.selectedCategory}
-          categories={this.props.todoList.categories} />
+        />
 
 
         <Tasks
-          actions={this.props.actions} 
+          actions={this.props.actions}
           selectedCategory={this.props.selectedCategory}
+          query={this.props.query}
         />
       </div>;
     return block;

@@ -12,10 +12,22 @@ class TodoList extends Component {
 
 
     this.state = {
+      tasksTotal: 0,
+      tasksDone: 0,
       query: "",
       todoList: this.props.todoList,
       selectedCategory: null,
     };
+  }
+
+  setTodoList(todoList) {
+    this.setState({
+      todoList: todoList
+    })
+  }
+
+  setTask(task, state) {
+    console.log('setTask', task, state);
   }
 
   onSearch(query) {
@@ -33,15 +45,22 @@ class TodoList extends Component {
   render() {
     const actions = {
       search: this.onSearch,
-      selectCategory: this.selectCategory
+      selectCategory: this.selectCategory,
+      setTask: this.setTask,
+      setTodoList: this.setTodoList
     }
     const block =
       <div className="todo-list">
-        <TodoListHeader actions={actions} query={this.state.search} />
+        <TodoListHeader
+          actions={actions}
+          query={this.state.query}
+        />
         <TodoListContent
           actions={actions}
+          query={this.state.query}
           selectedCategory={this.state.selectedCategory}
-          todoList={this.state.todoList} />
+          todoList={this.state.todoList}
+        />
       </div>;
     return block;
   }

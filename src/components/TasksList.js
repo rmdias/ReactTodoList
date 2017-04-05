@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import Task from './Task';
 
 class TasksList extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.createTaks = this.createTaks.bind(this);
+  }
 
   createTaks(task, index) {
     const block =
       <Task
-        description={task.description}
+        actions={this.props.actions}
+        task={task}
         key={task.id}
-        id={task.id}
-        done={task.done}
       />
     return block;
   }

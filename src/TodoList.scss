@@ -1,12 +1,20 @@
 @import "../node_modules/bourbon/app/assets/stylesheets/bourbon";
-
+$color-light-gray: #F8f8f8;
+$color-gray: #efefef;
 
 h2, h3 {
   display: none;
 }
-// label {
-//   display: none;
-// }
+ul {
+  margin: 0;
+  padding: 0;
+}
+label {
+  margin-bottom: 0;
+}
+li {
+  list-style-type: none;
+}
 input[type=text] {
   border: 0;
   height: 3em;
@@ -34,7 +42,7 @@ input[type=checkbox] {
   &__header {
     // padding: 30px;
     align-items: stretch;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid $color-light-gray;
     display: flex;
     flex-wrap: wrap;
   }
@@ -83,7 +91,6 @@ input[type=checkbox] {
 
   &__query {
     flex-grow: 1;
-    background-color: red;
     display: flex;
     flex-direction: column;
 
@@ -111,13 +118,12 @@ input[type=checkbox] {
 @mixin todo-list__section-header() {
 
   &__header {
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid $color-light-gray;
   }
 
   &__create {
 
     &-form {
-      background-color: red;
       display: flex;
     }
 
@@ -144,11 +150,12 @@ input[type=checkbox] {
 .categories {
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #efefef;
+  border-right: 1px solid $color-gray;
 
   @include todo-list__section-header();
 
   &__header {
+    border-bottom-color: $color-gray;
   }
 
   &__title {
@@ -177,6 +184,8 @@ input[type=checkbox] {
 
   &__content {
     flex-grow: 1;
+    width: 250px;
+    background-color: $color-light-gray;
   }
 
   &__title {
@@ -187,40 +196,47 @@ input[type=checkbox] {
     flex-direction: column;
     margin: 0;
     padding: 0;
+    counter-reset: categories;
 
     & & {
-      display: none;
+      // display: none;
       flex-basis: 100%;
     }
 
     & .category--selected & {
-      display: flex;
+      // display: flex;
     }
   }
 }
 
 
-.category, .category--selected {
+.category {
 
   & {
     list-style-type: none;
+    counter-increment: categories;
   }
 
 
   &__content {
     align-items: center;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid $color-gray;
     display: flex;
     height: 3em;
     justify-content: flex-end;
     padding: 0 1em;
     cursor: pointer;
 
-    &:hover {
-      background-color: #efefef;
+    &::before {
+      content: counters(categories, ". ") ". ";
+      margin-right: 0.3em;
     }
 
-    .form__button--link {
+    &:hover {
+      background-color: #FFFFFF;
+    }
+
+    .form__button--link:not(.category__name-button) {
       visibility: hidden;
       margin-left: 0.5em;
     }
@@ -230,11 +246,22 @@ input[type=checkbox] {
     }
   }
 
-  &__name {
+  &__name-button {
     flex-grow: 1;
     font-weight: bold;
   }
 }
+
+.category {
+  &--selected {
+    @extend .category;
+  }
+
+  &--selected > &__content {
+    background-color: $color-gray;
+  }
+}
+
 
 .tasks {
   display: flex;
@@ -280,11 +307,36 @@ input[type=checkbox] {
 
 
 .task {
-  &__done {
+  align-items: center;
+  border-bottom: 1px solid $color-gray;
+  display: flex;
+  height: 3em;
+  justify-content: flex-end;
+  padding: 0 1em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #FFFFFF;
+  }
+
+  .form__button--link {
+    visibility: hidden;
+    margin-left: 0.5em;
+  }
+
+  &:hover .form__button--link {
+    visibility: visible;
+  }
+
+  &__description {
+    & {
+      flex-grow: 1;
+    }
     &-checkbox {
     }
 
     &-label {
+      flex-grow: 1;
     }
   }
 

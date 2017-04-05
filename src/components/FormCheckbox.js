@@ -18,6 +18,7 @@ class FormCheckbox extends Component {
     const block = (
       <span className={bem}>
         <input
+          onChange={this.props.onChange}
           defaultChecked={this.props.checked}
           className={`${bemCheckbox} form__input--checkbox`}
           id={checkboxId}

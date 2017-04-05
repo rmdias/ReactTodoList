@@ -66,6 +66,7 @@ class Categories extends Component {
             actions={this.props.actions}
             categories={this.props.categories}
             selectedCategory={this.props.selectedCategory}
+            query={this.props.query}
           />
         </div>
       </section>;

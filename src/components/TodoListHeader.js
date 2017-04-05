@@ -21,12 +21,10 @@ class TodoListHeader extends Component {
     this.setState({
       query: event.target.value
     });
-
-    console.log(inputValue);
+    this.props.actions.search(inputValue);
   }
 
   onSubmit() {
-    console.log("submiting", this.state.query);
     this.props.actions.search(this.state.query);
   }
 
