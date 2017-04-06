@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import FormCheckbox from './FormCheckbox';
 import FormButton from './FormButton';
 
 
-class Task extends Component {
+class Task extends PureComponent {
   constructor(props) {
     super(props);
     this.onContentClick = this.onContentClick.bind(this);
@@ -12,6 +12,11 @@ class Task extends Component {
       done: this.props.task.done
     }
   }
+
+  shouldComponentUpdate() {
+    return false;
+  }
+
 
   onChange(event) {
     this.setState({
@@ -34,6 +39,8 @@ class Task extends Component {
   }
 
   render() {
+  console.log('Rendering... ', 'Task');
+
     const task = this.props.task;
 
     const block =

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import FormButton from './FormButton';
 import CategoriesList from './CategoriesList';
 
 
-class Category extends Component {
+class Category extends PureComponent {
   constructor(props) {
     super(props);
     this.categoriesList = this.props.category.categories || [];
@@ -32,12 +32,14 @@ class Category extends Component {
 
 
   render() {
+  console.log('Rendering... ', 'Category');
+
     const category = this.props.category;
     const isSelected = category === this.props.selectedCategory;
 
     let categoryClassName = isSelected ? 'category--selected' : 'category'
 
-    console.log('Done tasks', this.calculateProgress(category), category.tasks);
+    // console.log('Done tasks', this.calculateProgress(category), category.tasks);
 
     const categories = <CategoriesList
       actions={this.props.actions}

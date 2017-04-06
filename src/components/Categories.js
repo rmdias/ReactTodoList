@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
 import CategoriesList from './CategoriesList';
 
 
-class Categories extends Component {
+class Categories extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -15,6 +15,11 @@ class Categories extends Component {
       newCategoryName: ""
     };
   }
+  
+  shouldComponentUpdate() {
+    return false;
+  }
+
 
   onTypeNewCategory(event) {
     const newCategoryName = event.target.value
@@ -38,6 +43,8 @@ class Categories extends Component {
   }
 
   render() {
+  console.log('Rendering... ', 'Categories');
+
     const block =
       <section className="categories">
         <header className="categories__header">

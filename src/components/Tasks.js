@@ -1,43 +1,47 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
 import TasksList from './TasksList';
 
 
-class Tasks extends Component {
-  constructor(props) {
-    super(props);
+class Tasks extends PureComponent {
+  // constructor(props) {
+  //   super(props);
 
-    this.onTypeNewTask = this.onTypeNewTask.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.onTypeNewTask = this.onTypeNewTask.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    //
+    // this.state = {
+    //   newTaskDescription: ""
+    // };
+  // }
 
-    this.state = {
-      newTaskDescription: ""
-    };
-  }
 
-  onTypeNewTask(event) {
-    const newTaskDescription= event.target.value
-    this.setState({
-      newTaskDescription: newTaskDescription
-    });
-    console.log('newTaskDescription',newTaskDescription);
-  }
-
-  handleSubmit(event) {
-    this.createNewTask(this.state.newTaskDescription);
-  }
-
-  createNewTask(name) {
-    console.log('Creating new category: ', name, this.props.todoList);
-
-    console.log(`Task ${name} was created`);
-    this.setState({
-      newTaskDescription: ""
-    });
-  }
+  //
+  // onTypeNewTask(event) {
+  //   const newTaskDescription= event.target.value
+  //   this.setState({
+  //     newTaskDescription: newTaskDescription
+  //   });
+  //   console.log('newTaskDescription',newTaskDescription);
+  // }
+  //
+  // handleSubmit(event) {
+  //   this.createNewTask(this.state.newTaskDescription);
+  // }
+  //
+  // createNewTask(name) {
+  //   console.log('Creating new category: ', name, this.props.todoList);
+  //
+  //   console.log(`Task ${name} was created`);
+  //   this.setState({
+  //     newTaskDescription: ""
+  //   });
+  // }
 
   render() {
+  console.log('Rendering... ', 'Tasks');
+
     const block =
     <section className="tasks">
       <header className="tasks__header">
@@ -49,7 +53,7 @@ class Tasks extends Component {
             block="tasks"
             element="create-input"
             onChange={this.onTypeNewTask}
-            value={this.state.newTaskDescription}
+            // value={this.state.newTaskDescription}
             label="Add a new task" />
 
           <FormButton
@@ -62,10 +66,12 @@ class Tasks extends Component {
       </header>
       <div className="tasks__content">
         <h3 className="tasks__title">Categories List</h3>
-        <TasksList 
+        <TasksList
           actions={this.props.actions}
           selectedCategory={this.props.selectedCategory}
-          tasks={this.props.tasks} />
+          query={this.props.query}
+          tasks={this.props.tasks}
+        />
       </div>
     </section>;
     return block;

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Category from './Category';
 
 
-class CategoriesList extends Component {
+class CategoriesList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -28,6 +28,8 @@ class CategoriesList extends Component {
   }
 
   render() {
+  console.log('Rendering... ', 'CategoriesList');
+
 
     const categoriesList = this.props.categories.map(this.createCategory);
     const block = <ul className="categories__list">

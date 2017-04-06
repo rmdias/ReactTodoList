@@ -233,7 +233,7 @@ input[type=checkbox] {
     }
 
     &:hover {
-      background-color: #FFFFFF;
+      background-color: $color-light-gray;
     }
 
     .form__button--link:not(.category__name-button) {
@@ -316,7 +316,7 @@ input[type=checkbox] {
   cursor: pointer;
 
   &:hover {
-    background-color: #FFFFFF;
+    background-color: $color-light-gray;
   }
 
   .form__button--link {

@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Categories from './Categories';
 import Tasks from './Tasks';
 
-class TodoListContent extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
+class TodoListContent extends PureComponent {
   render() {
-
+  console.log('Rendering... ', 'TodoListContent');
     const block =
       <div className="todo-list__content">
         <Categories
           actions={this.props.actions}
           categories={this.props.todoList.categories}
-          query={this.props.query}
           selectedCategory={this.props.selectedCategory}
         />
 

@@ -6,6 +6,10 @@ class TasksList extends Component {
     super(props);
     this.createTaks = this.createTaks.bind(this);
   }
+  
+  shouldComponentUpdate() {
+    return true;
+  }
 
   createTaks(task, index) {
     const block =
@@ -16,12 +20,32 @@ class TasksList extends Component {
       />
     return block;
   }
-  render() {
-    var listTasks = null;
 
+  getFilteredTasks() {
     if(!!this.props.selectedCategory) {
-      listTasks = this.props.selectedCategory.tasks.map(this.createTaks)
-    };
+      const tasks = this.props.selectedCategory.tasks;
+
+      if(!!this.props.query) {
+        console.log('Has query');
+
+        const re = new RegExp(this.props.query, "i");
+        const matchQuery = (task) => task.description.match(re);
+
+        return tasks.filter(matchQuery);
+      } else {
+        console.log('Has no query');
+        return tasks;
+      }
+    } else {
+      console.log('No selected category');
+      return [];
+    }
+  }
+
+  render() {
+  console.log('Rendering... ', 'TasksList');
+
+    var listTasks =  this.getFilteredTasks().map(this.createTaks);
 
     const block = <ul className="tasks__list">{listTasks}</ul>;
     return block;

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class FormButton extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+class FormButton extends PureComponent {
   render() {
+  console.log('Rendering... ', 'FormButton');
+
     const bem = `${this.props.block}__${this.props.element}`;
     const bemButton = `${bem}-button`;
     const label = this.props.label;

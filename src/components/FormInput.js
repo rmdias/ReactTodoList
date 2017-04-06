@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class FormInput extends Component {
+class FormInput extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -34,6 +34,8 @@ class FormInput extends Component {
   }
 
   render() {
+  console.log('Rendering... ', 'FormInput');
+
     const bem = `${this.props.block}__${this.props.element}`;
     const bemInput = `${bem}-input`;
     const bemLabel = `${bem}-label`;

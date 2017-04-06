@@ -43,6 +43,7 @@ class TodoList extends Component {
   }
 
   render() {
+    console.log('Rendering', "Todo list")
     const actions = {
       search: this.onSearch,
       selectCategory: this.selectCategory,
@@ -53,7 +54,7 @@ class TodoList extends Component {
       <div className="todo-list">
         <TodoListHeader
           actions={actions}
-          query={this.state.query}
+          // query={this.state.query}
         />
         <TodoListContent
           actions={actions}
