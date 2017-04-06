@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
-class FormInput extends PureComponent {
+class FormInput extends Component {
   constructor(props) {
     super(props);
 
@@ -11,6 +11,7 @@ class FormInput extends PureComponent {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
 
   onChange(event) {
     const inputValue = event.target.value;

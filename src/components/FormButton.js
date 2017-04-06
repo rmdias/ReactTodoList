@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
-class FormButton extends PureComponent {
+class FormButton extends Component {
   render() {
   console.log('Rendering... ', 'FormButton');
 

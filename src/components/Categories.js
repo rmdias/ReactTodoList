@@ -9,37 +9,34 @@ class Categories extends PureComponent {
     super(props);
 
     this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
+    this.createNewCategory = this.createNewCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       newCategoryName: ""
     };
   }
-  
-  shouldComponentUpdate() {
-    return false;
-  }
-
 
   onTypeNewCategory(event) {
     const newCategoryName = event.target.value
     this.setState({
       newCategoryName: newCategoryName
     });
-    // console.log('newCategoryName',newCategoryName);
   }
 
   onSubmit(event) {
     this.createNewCategory(this.state.newCategoryName);
   }
 
-  createNewCategory(name) {
-    console.log('Creating new category: ', name, this.props.todoList);
+  createNewCategory(newCategoryName) {
 
-    console.log(`Category ${name} was created`);
-    this.setState({
-      newCategoryName: ""
-    });
+    const newCategory = {
+      id: 4,
+      name: newCategoryName
+    }
+
+
+    this.props.actions.setNewCategory(newCategory);
   }
 
   render() {

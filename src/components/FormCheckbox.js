@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
-class FormCheckbox extends PureComponent {
+class FormCheckbox extends Component {
 
   render() {
   console.log('Rendering... ', 'FormCheckbox');

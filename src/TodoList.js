@@ -9,10 +9,13 @@ class TodoList extends Component {
 
     this.onSearch = this.onSearch.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
-
+    this.setNewCategory = this.setNewCategory.bind(this);
+    this.set = this.set.bind(this);
+    this.categoriesLength = 0;
+    this.categoriesMaxLength = 0;
 
     this.state = {
-      tasksTotal: 0,
+      tasksLength: 0,
       tasksDone: 0,
       query: "",
       todoList: this.props.todoList,
@@ -20,10 +23,45 @@ class TodoList extends Component {
     };
   }
 
+  set(name, value) {
+    const property = {};
+    property[name] = value;
+    this.setState(property)
+  }
+
+
+
+  setCategoriesLength(newValue) {
+    console.log('setCategoriesLength', newValue);
+    this.categoriesLength = newValue;
+
+    const currentMax = this.categoriesMaxLength;
+    this.categoriesMaxLength = Math.max(currentMax, newValue);
+  }
+
+  setTasksLength(value) {
+    this.set('tasksLength', value);
+  }
+
   setTodoList(todoList) {
-    this.setState({
+    const newTodoList = {
       todoList: todoList
-    })
+    };
+
+    this.categoriesLength = 0;
+    this.categoriesMaxLength = 0;
+
+    console.log('Setting new todoList', newTodoList);
+
+    this.setState(newTodoList);
+  }
+
+  setNewCategory(category) {
+    console.log('Creating new category', this.state.todoList)
+    const newTodoList = {
+      'categories': [category, ...this.state.todoList.categories]
+    }
+    this.setTodoList(newTodoList);
   }
 
   setTask(task, state) {
@@ -43,9 +81,11 @@ class TodoList extends Component {
   }
 
   render() {
-    console.log('Rendering', "Todo list")
     const actions = {
+      setCategoriesLength: this.setCategoriesLength,
+      set: this.set,
       search: this.onSearch,
+      setNewCategory: this.setNewCategory,
       selectCategory: this.selectCategory,
       setTask: this.setTask,
       setTodoList: this.setTodoList
@@ -71,16 +111,16 @@ TodoList.defaultProps = {
   todoList: {
     categories: [
       {
-        id: "cat-1",
+        id: 0,
         name: "Home",
         tasks: [
           {
-            id: "task-1",
+            id: 1,
             description: "Pay taxes",
             done: true,
           },
           {
-            id: "task-2",
+            id: 2,
             description: "Pay rent",
             done: false,
           }
@@ -88,16 +128,16 @@ TodoList.defaultProps = {
 
         categories: [
           {
-            id: "cat-1-1",
+            id: 2,
             name: "Kitchen",
             tasks: [
               {
-                id: "task-3",
+                id: 3,
                 description: "Clean oven",
                 done: false
               },
               {
-                id: "task-4",
+                id: 4,
                 description: "Throw garbage away",
                 done: true
               }
@@ -106,16 +146,16 @@ TodoList.defaultProps = {
         ]
       },
       {
-        id: "cat-2",
+        id: 3,
         name: "Office",
         tasks: [
           {
-            id: "task-5",
+            id: 5,
             description: "Call Adam",
             done: false,
           },
           {
-            id: "task-6",
+            id: 6,
             description: "Meetign with customer",
             done: false,
           }
@@ -123,16 +163,16 @@ TodoList.defaultProps = {
 
         categories: [
           {
-            id: "cat-2-1",
+            id: 4,
             name: "Desktop",
             tasks: [
               {
-                id: "task-7",
+                id: 7,
                 description: "Change computer",
                 done: false
               },
               {
-                id: "task-8",
+                id: 9,
                 description: "Format HD",
                 done: false
               }
