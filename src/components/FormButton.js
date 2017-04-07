@@ -19,7 +19,8 @@ class FormButton extends Component {
       return <a
         className={`${bemButton} form__button--link`}
         href={href}
-        id={id}>{label}</a>
+        id={id}
+        onClick={this.props.onClick}>{label}</a>
     } else {
 
       var inputType = this.props.action || 'button';
@@ -28,6 +29,7 @@ class FormButton extends Component {
         className={`${bemButton} form__button`}
         id={id}
         name={this.props.action}
+        onClick={this.props.onClick}
         type={inputType}
         value={label}
       />;

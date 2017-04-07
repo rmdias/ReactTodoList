@@ -15,8 +15,8 @@ class TasksList extends Component {
 
   createTaks(task, index) {
     const block = <Task
-      actions={this.props.actions} 
-      task={task} 
+      actions={this.props.actions}
+      task={task}
       key={task.id}/>
 
     return block;
@@ -27,7 +27,7 @@ class TasksList extends Component {
       const tasks = this.props.selectedCategory.tasks;
 
       if (!!this.props.query) {
-        console.log('Has query');
+        // console.log('Has query');
 
         const re = new RegExp(this.props.query, "i");
         const matchQuery = (task) => task
@@ -36,12 +36,12 @@ class TasksList extends Component {
 
         return tasks.filter(matchQuery);
       } else {
-        console.log('Has no query');
+        // console.log('Has no query');
 
         return tasks;
       }
     } else {
-      console.log('No selected category');
+      // console.log('No selected category');
 
       return [];
     }

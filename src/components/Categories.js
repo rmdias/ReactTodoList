@@ -7,27 +7,17 @@ class Categories extends PureComponent {
   constructor(props) {
     super(props);
 
+    // Binding Methods
+    this.appendCategoriesLength = this.appendCategoriesLength.bind(this);
+    this.createNewCategory = this.createNewCategory.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
+    this.setNewCategory = this.setNewCategory.bind(this);
+    this.unsetCategory = this.unsetCategory.bind(this);
+    this.editCategory = this.editCategory.bind(this);
+    this.addSubCategory = this.addSubCategory.bind(this);
+
     this.categoriesLength = 0;
-
-    this.onTypeNewCategory = this
-      .onTypeNewCategory
-      .bind(this);
-
-    this.createNewCategory = this
-      .createNewCategory
-      .bind(this);
-
-    this.appendCategoriesLength = this
-      .appendCategoriesLength
-      .bind(this);
-
-    this.onSubmit = this
-      .onSubmit
-      .bind(this);
-
-    this.setNewCategory = this
-      .setNewCategory
-      .bind(this);
 
     this.state = {
       newCategoryName: ""
@@ -70,13 +60,16 @@ class Categories extends PureComponent {
     this.props.actions.setTodoList(newTodoList);
   }
 
-
-  componentWillMount() {
-    this.categoriesLength = 0;
-    console.log('Mounting... ', 'Categories');
+  unsetCategory(category) {
+    console.log('Unseting this category', category);
   }
-  componentDidMount() {
-    console.log('Mounted... ', 'Categories');
+
+  editCategory(category) {
+    console.log('Editing this category', category);
+  }
+
+  addSubCategory(category) {
+    console.log('Add a subcategory into this category', category);
   }
 
   render() {
@@ -85,6 +78,9 @@ class Categories extends PureComponent {
 
     const actions = {
       appendCategoriesLength: this.appendCategoriesLength,
+      unsetCategory: this.unsetCategory,
+      editCategory: this.editCategory,
+      addSubCategory: this.addSubCategory,
       ...this.props.actions,
     };
 

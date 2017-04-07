@@ -10,9 +10,11 @@ class Category extends PureComponent {
     this.id = this.props.category.id;
     this.name = this.props.category.name;
 
-    this.onContentClick = this
-      .onContentClick
-      .bind(this);
+    // Binding Methods
+    this.onUnset = this.onUnset.bind(this);
+    this.onContentClick = this.onContentClick.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onSet = this.onSet.bind(this);
   }
 
   calculateProgress(category) {
@@ -36,6 +38,18 @@ class Category extends PureComponent {
         .actions
         .selectCategory(this.props.category);
     }
+  }
+
+  onUnset(event) {
+    this.props.actions.unsetCategory(this.props.category);
+  }
+
+  onEdit(event) {
+    this.props.actions.editCategory(this.props.category);
+  }
+
+  onSet(event) {
+    this.props.actions.setSubCategory(this.props.category);
   }
 
   render() {
@@ -75,6 +89,7 @@ class Category extends PureComponent {
           element="edit"
           id={this.id}
           label="Edit"
+          onClick={this.onEdit}
           type="link"
         />
 
@@ -84,7 +99,7 @@ class Category extends PureComponent {
           element="delete"
           id={this.id}
           label="Delete"
-          onClick={this.deleteCategory}
+          onClick={this.onUnset}
           type="link"
         />
 
@@ -94,6 +109,7 @@ class Category extends PureComponent {
           element="submit"
           id={this.id}
           label="Add"
+          onClick={this.onSet}
           type="link"
         />
 
