@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import Search from './Search';
 import ProgressBar from './ProgressBar';
 
@@ -11,22 +11,23 @@ class TodoListHeader extends PureComponent {
     return false;
   }
 
-
   render() {
-  // console.log('Rendering... ', 'TodoListHeader');
+    // console.log('Rendering... ', 'TodoListHeader');
 
-    const block =
-      <header className="todo-list__header">
-        <h1 className="todo-list__title">React Todo List</h1>
+    const block = <header className="todo-list__header">
+      <h1 className="todo-list__title">React Todo List</h1>
 
-        <Search
-          actions={this.props.actions}
-          query={this.props.query}
-         />
+      <Search
+        actions={this.props.actions}
+        query={this.props.query}
+      />
 
-         <ProgressBar max="100" value="50" />
+      <ProgressBar
+        max="100"
+        value="50"
+      />
 
-      </header>;
+    </header>;
     return block;
   }
 }

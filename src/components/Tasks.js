@@ -1,29 +1,29 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
 import TasksList from './TasksList';
-
 
 class Tasks extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onTypeNewTask = this.onTypeNewTask.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onTypeNewTask = this
+      .onTypeNewTask
+      .bind(this);
+
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
 
     this.state = {
       newTaskDescription: ""
     };
   }
 
-
-
   onTypeNewTask(event) {
-    const newTaskDescription= event.target.value
-    this.setState({
-      newTaskDescription: newTaskDescription
-    });
-    console.log('newTaskDescription',newTaskDescription);
+    const newTaskDescription = event.target.value
+    this.setState({newTaskDescription: newTaskDescription});
+    console.log('newTaskDescription', newTaskDescription);
   }
 
   handleSubmit(event) {
@@ -32,18 +32,14 @@ class Tasks extends PureComponent {
 
   createNewTask(name) {
     console.log('Creating new category: ', name, this.props.todoList);
-
     console.log(`Task ${name} was created`);
-    this.setState({
-      newTaskDescription: ""
-    });
+    this.setState({newTaskDescription: ""});
   }
 
   render() {
-  // console.log('Rendering... ', 'Tasks');
+    // console.log('Rendering... ', 'Tasks');
 
-    const block =
-    <section className="tasks">
+    const block = <section className="tasks">
       <header className="tasks__header">
         <h2 className="tasks__title">Tasks</h2>
         <form onSubmit={this.handleSubmit} action="" className="tasks__create-form">
@@ -53,14 +49,15 @@ class Tasks extends PureComponent {
             block="tasks"
             element="create-input"
             onChange={this.onTypeNewTask}
-            // value={this.state.newTaskDescription}
-            label="Add a new task" />
+            label="Add a new task"
+          />
 
           <FormButton
             action="submit"
             block="tasks"
             element="create-submit"
-            label="Add" />
+            label="Add"
+          />
 
         </form>
       </header>

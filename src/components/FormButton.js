@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class FormButton extends Component {
   render() {
-  // console.log('Rendering... ', 'FormButton');
+    // console.log('Rendering... ', 'FormButton');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemButton = `${bem}-button`;
@@ -10,26 +10,27 @@ class FormButton extends Component {
     let href = `#${this.props.action}`;
     let id = bemButton;
 
-    if(this.props.id) {
+    if (this.props.id) {
       id += `--${this.props.id}`;
       href = `#${id}`;
     }
 
-    if(this.props.type === 'link') {
+    if (this.props.type === 'link') {
       return <a
-               className={`${bemButton} form__button--link`}
-               href={href}
-               id={id}>{label}</a>
+        className={`${bemButton} form__button--link`}
+        href={href}
+        id={id}>{label}</a>
     } else {
 
       var inputType = this.props.action || 'button';
 
       return <input
-               className={`${bemButton} form__button`}
-               id={id}
-               name={this.props.action}
-               type={inputType}
-               value={label} />;
+        className={`${bemButton} form__button`}
+        id={id}
+        name={this.props.action}
+        type={inputType}
+        value={label}
+      />;
     }
   }
 }

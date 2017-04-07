@@ -1,41 +1,42 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class FormInput extends Component {
   constructor(props) {
     super(props);
 
-    this.state= {
+    this.state = {
       value: this.props.value || ""
     }
 
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onKeyUp = this
+      .onKeyUp
+      .bind(this);
+    this.onChange = this
+      .onChange
+      .bind(this);
   }
-
 
   onChange(event) {
     const inputValue = event.target.value;
 
-    this.setState({
-      value: inputValue
-    });
+    this.setState({value: inputValue});
 
-    if(this.props.onChange) {
-      this.props.onChange(event);
+    if (this.props.onChange) {
+      this
+        .props
+        .onChange(event);
     }
   }
 
   onKeyUp(event) {
     const wasEscPressed = event.keyCode === 27;
-    if(wasEscPressed) {
-      this.setState({
-        value: ''
-      })
+    if (wasEscPressed) {
+      this.setState({value: ''})
     }
   }
 
   render() {
-  // console.log('Rendering... ', 'FormInput');
+    // console.log('Rendering... ', 'FormInput');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemInput = `${bem}-input`;
@@ -44,23 +45,29 @@ class FormInput extends Component {
     const placeholder = this.props.placeholder || this.props.label || "";
     let inputId = bemInput;
 
-    if(this.props.id) {
+    if (this.props.id) {
       inputId += `--${this.props.id}`;
     }
 
-    const block = (<span className={bem}>
-      <label
-        className={`${bemLabel} form__label`}
-        htmlFor={inputId}>{label}</label>
-      <input
-        onKeyUp={this.onKeyUp}
-        onChange={this.onChange}
-        className={`${bemInput} form__input--text`}
-        id={inputId}
-        placeholder={placeholder}
-        type='text'
-        value={this.state.value} />
-    </span>);
+    const block = (
+      <span className={bem}>
+
+        <label
+          className={`${bemLabel} form__label`}
+          htmlFor={inputId}>{label}</label>
+
+        <input
+          className={`${bemInput} form__input--text`}
+          id={inputId}
+          onChange={this.onChange}
+          onKeyUp={this.onKeyUp}
+          placeholder={placeholder}
+          type='text'
+          value={this.state.value}
+        />
+
+      </span>
+    );
     return block;
   }
 }

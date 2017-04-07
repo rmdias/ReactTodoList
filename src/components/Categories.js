@@ -1,18 +1,30 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
 import CategoriesList from './CategoriesList';
-
 
 class Categories extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
-    this.createNewCategory = this.createNewCategory.bind(this);
-    this.appendCategoriesLength = this.appendCategoriesLength.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onTypeNewCategory = this
+      .onTypeNewCategory
+      .bind(this);
+
+    this.createNewCategory = this
+      .createNewCategory
+      .bind(this);
+
+    this.appendCategoriesLength = this
+      .appendCategoriesLength
+      .bind(this);
+
+    this.onSubmit = this
+      .onSubmit
+      .bind(this);
+
     this.categoriesLength = 0;
+
     this.state = {
       newCategoryName: ""
     };
@@ -25,9 +37,7 @@ class Categories extends PureComponent {
 
   onTypeNewCategory(event) {
     const newCategoryName = event.target.value
-    this.setState({
-      newCategoryName: newCategoryName
-    });
+    this.setState({newCategoryName: newCategoryName});
   }
 
   onSubmit(event) {
@@ -38,13 +48,16 @@ class Categories extends PureComponent {
   createNewCategory(newCategoryName) {
 
     const newCategory = {
+      categories: [],
       id: this.categoriesLength,
       name: newCategoryName,
       tasks: [],
-      categories: []
     }
 
-    this.props.actions.setNewCategory(newCategory);
+    this
+      .props
+      .actions
+      .setNewCategory(newCategory);
   }
 
   componentWillMount() {
@@ -56,46 +69,47 @@ class Categories extends PureComponent {
   }
 
   render() {
-  // console.log('Rendering... ', 'Categories');
-  this.categoriesLength=0;
+    // console.log('Rendering... ', 'Categories');
+    this.categoriesLength = 0;
 
     const actions = {
       appendCategoriesLength: this.appendCategoriesLength,
-      ...this.props.actions
+      ...this.props.actions,
     };
 
-    const block =
-      <section className="categories">
-        <header className="categories__header">
-          <h2 className="categories__title">Categories</h2>
-          <form action="" onSubmit={this.onSubmit} className="categories__create-form">
-            <h3 className="categories__sub-title">Create Category</h3>
+    const block = <section className="categories">
+      <header className="categories__header">
+        <h2 className="categories__title">Categories</h2>
+        <form action="" onSubmit={this.onSubmit} className="categories__create-form">
+          <h3 className="categories__sub-title">Create Category</h3>
 
-            <FormInput
-              block="categories"
-              element="create-input"
-              onChange={this.onTypeNewCategory}
-              value={this.state.newCategoryName}
-              label="Add new category" />
-
-            <FormButton
-              action="submit"
-              block="categories"
-              element="create-submit"
-              label="Add" />
-
-          </form>
-        </header>
-        <div className="categories__content">
-          <h3 className="categories__title">Categories List</h3>
-          <CategoriesList
-            actions={actions}
-            categories={this.props.categories}
-            selectedCategory={this.props.selectedCategory}
-            query={this.props.query}
+          <FormInput
+            block="categories"
+            element="create-input"
+            onChange={this.onTypeNewCategory}
+            value={this.state.newCategoryName}
+            label="Add new category"
           />
-        </div>
-      </section>;
+
+          <FormButton
+            action="submit"
+            block="categories"
+            element="create-submit"
+            label="Add"
+          />
+
+        </form>
+      </header>
+      <div className="categories__content">
+        <h3 className="categories__title">Categories List</h3>
+        <CategoriesList
+          actions={actions}
+          categories={this.props.categories}
+          selectedCategory={this.props.selectedCategory}
+          query={this.props.query}
+        />
+      </div>
+    </section>;
     return block;
   }
 }

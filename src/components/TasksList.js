@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Task from './Task';
 
 class TasksList extends Component {
   constructor(props) {
     super(props);
-    this.createTaks = this.createTaks.bind(this);
+    this.createTaks = this
+      .createTaks
+      .bind(this);
   }
 
   shouldComponentUpdate() {
@@ -12,24 +14,21 @@ class TasksList extends Component {
   }
 
   createTaks(task, index) {
-    const block =
-      <Task
-        actions={this.props.actions}
-        task={task}
-        key={task.id}
-      />
+    const block = <Task actions={this.props.actions} task={task} key={task.id}/>
     return block;
   }
 
   getFilteredTasks() {
-    if(!!this.props.selectedCategory) {
+    if (!!this.props.selectedCategory) {
       const tasks = this.props.selectedCategory.tasks;
 
-      if(!!this.props.query) {
+      if (!!this.props.query) {
         console.log('Has query');
 
         const re = new RegExp(this.props.query, "i");
-        const matchQuery = (task) => task.description.match(re);
+        const matchQuery = (task) => task
+          .description
+          .match(re);
 
         return tasks.filter(matchQuery);
       } else {
@@ -43,9 +42,11 @@ class TasksList extends Component {
   }
 
   render() {
-  // console.log('Rendering... ', 'TasksList');
+    // console.log('Rendering... ', 'TasksList');
 
-    var listTasks =  this.getFilteredTasks().map(this.createTaks);
+    var listTasks = this
+      .getFilteredTasks()
+      .map(this.createTaks);
 
     const block = <ul className="tasks__list">{listTasks}</ul>;
     return block;

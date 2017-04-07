@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TodoListHeader from './components/TodoListHeader';
 import TodoListContent from './components/TodoListContent';
 import './TodoList.css';
@@ -7,19 +7,21 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
 
-    this.onSearch = this.onSearch.bind(this);
-    this.selectCategory = this.selectCategory.bind(this);
-    this.setNewCategory = this.setNewCategory.bind(this);
-    this.set = this.set.bind(this);
     this.categoriesLength = 0;
     this.categoriesMaxLength = 0;
+    this.onSearch = this.onSearch.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
+    this.set = this.set.bind(this);
+    this.setNewCategory = this.setNewCategory.bind(this);
+
+    const todoList = JSON.parse(localStorage.getItem('reactTodoList'))
 
     this.state = {
-      tasksLength: 0,
-      tasksDone: 0,
       query: "",
-      todoList: this.props.todoList,
       selectedCategory: null,
+      tasksDone: 0,
+      tasksLength: 0,
+      todoList: todoList || this.props.todoList
     };
   }
 
@@ -29,10 +31,7 @@ class TodoList extends Component {
     this.setState(property)
   }
 
-
-
   setCategoriesLength(newValue) {
-    console.log('setCategoriesLength', newValue);
     this.categoriesLength = newValue;
 
     const currentMax = this.categoriesMaxLength;
@@ -50,16 +49,16 @@ class TodoList extends Component {
 
     this.categoriesLength = 0;
     this.categoriesMaxLength = 0;
-
-    console.log('Setting new todoList', newTodoList);
-
+    localStorage.setItem('reactTodoList', JSON.stringify(todoList));
     this.setState(newTodoList);
   }
 
   setNewCategory(category) {
     console.log('TDL - setNewCategory', category)
     const newTodoList = {
-      'categories': [category, ...this.state.todoList.categories]
+      'categories': [
+        category, ...this.state.todoList.categories
+      ]
     }
     this.setTodoList(newTodoList);
   }
@@ -69,40 +68,35 @@ class TodoList extends Component {
   }
 
   onSearch(query) {
-    this.setState({
-      query: query
-    });
+    this.setState({query: query});
   }
 
   selectCategory(category) {
-    this.setState({
-      selectedCategory: category
-    });
+    this.setState({selectedCategory: category});
   }
 
   render() {
     const actions = {
-      setCategoriesLength: this.setCategoriesLength,
-      set: this.set,
       search: this.onSearch,
-      setNewCategory: this.setNewCategory,
       selectCategory: this.selectCategory,
+      set: this.set,
+      setCategoriesLength: this.setCategoriesLength,
+      setNewCategory: this.setNewCategory,
       setTask: this.setTask,
       setTodoList: this.setTodoList
     }
-    const block =
-      <div className="todo-list">
-        <TodoListHeader
-          actions={actions}
-          // query={this.state.query}
-        />
-        <TodoListContent
-          actions={actions}
-          query={this.state.query}
-          selectedCategory={this.state.selectedCategory}
-          todoList={this.state.todoList}
-        />
-      </div>;
+
+    const block = <div className="todo-list">
+      <TodoListHeader
+        actions={actions}/>
+
+      <TodoListContent
+        actions={actions}
+        query={this.state.query}
+        selectedCategory={this.state.selectedCategory}
+        todoList={this.state.todoList}
+      />
+    </div>;
     return block;
   }
 }
@@ -117,12 +111,11 @@ TodoList.defaultProps = {
           {
             id: 1,
             description: "Pay taxes",
-            done: true,
-          },
-          {
+            done: true
+          }, {
             id: 2,
             description: "Pay rent",
-            done: false,
+            done: false
           }
         ],
 
@@ -135,8 +128,7 @@ TodoList.defaultProps = {
                 id: 3,
                 description: "Clean oven",
                 done: false
-              },
-              {
+              }, {
                 id: 4,
                 description: "Throw garbage away",
                 done: true
@@ -144,20 +136,18 @@ TodoList.defaultProps = {
             ]
           }
         ]
-      },
-      {
+      }, {
         id: 3,
         name: "Office",
         tasks: [
           {
             id: 5,
             description: "Call Adam",
-            done: false,
-          },
-          {
+            done: false
+          }, {
             id: 6,
             description: "Meetign with customer",
-            done: false,
+            done: false
           }
         ],
 
@@ -170,8 +160,7 @@ TodoList.defaultProps = {
                 id: 7,
                 description: "Change computer",
                 done: false
-              },
-              {
+              }, {
                 id: 9,
                 description: "Format HD",
                 done: false

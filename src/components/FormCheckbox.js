@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class FormCheckbox extends Component {
 
   render() {
-  // console.log('Rendering... ', 'FormCheckbox');
+    // console.log('Rendering... ', 'FormCheckbox');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemCheckbox = `${bem}-checkbox`;
@@ -11,7 +11,7 @@ class FormCheckbox extends Component {
 
     let checkboxId = bemCheckbox;
 
-    if(this.props.id) {
+    if (this.props.id) {
       checkboxId += `--${this.props.id}`;
     }
 
@@ -25,9 +25,7 @@ class FormCheckbox extends Component {
           type='checkbox'
         />
 
-        <label
-          htmlFor={checkboxId}
-          className={`${bemLabel} form__label`}>
+        <label htmlFor={checkboxId} className={`${bemLabel} form__label`}>
           {this.props.label}
         </label>
       </span>
