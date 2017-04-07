@@ -10,6 +10,7 @@ class TodoListContent extends PureComponent {
         actions={this.props.actions}
         categories={this.props.todoList.categories}
         selectedCategory={this.props.selectedCategory}
+        todoList={this.props.todoList}
       />
 
       <Tasks
@@ -18,7 +19,7 @@ class TodoListContent extends PureComponent {
         query={this.props.query}
       />
     </div>;
-    
+
     return block;
   }
 }

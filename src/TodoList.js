@@ -9,10 +9,10 @@ class TodoList extends Component {
 
     this.categoriesLength = 0;
     this.categoriesMaxLength = 0;
-    this.onSearch = this.onSearch.bind(this);
+    this.search = this.search.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.setTodoList = this.setTodoList.bind(this);
     this.set = this.set.bind(this);
-    this.setNewCategory = this.setNewCategory.bind(this);
 
     const todoList = JSON.parse(localStorage.getItem('reactTodoList'))
 
@@ -31,53 +31,26 @@ class TodoList extends Component {
     this.setState(property)
   }
 
-  setCategoriesLength(newValue) {
-    this.categoriesLength = newValue;
-
-    const currentMax = this.categoriesMaxLength;
-    this.categoriesMaxLength = Math.max(currentMax, newValue);
-  }
-
-  setTasksLength(value) {
-    this.set('tasksLength', value);
-  }
-
   setTodoList(todoList) {
     const newTodoList = {
       todoList: todoList
     };
 
-    this.categoriesLength = 0;
-    this.categoriesMaxLength = 0;
     localStorage.setItem('reactTodoList', JSON.stringify(todoList));
     this.setState(newTodoList);
   }
 
-  setNewCategory(category) {
-    console.log('TDL - setNewCategory', category)
-    const newTodoList = {
-      'categories': [
-        category, ...this.state.todoList.categories
-      ]
-    }
-    this.setTodoList(newTodoList);
-  }
-
-  setTask(task, state) {
-    console.log('setTask', task, state);
-  }
-
-  onSearch(query) {
-    this.setState({query: query});
+  search(query) {
+    this.set('query', query);
   }
 
   selectCategory(category) {
-    this.setState({selectedCategory: category});
+    this.set('selectedCategory', category);
   }
 
   render() {
     const actions = {
-      search: this.onSearch,
+      search: this.search,
       selectCategory: this.selectCategory,
       set: this.set,
       setCategoriesLength: this.setCategoriesLength,

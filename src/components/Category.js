@@ -5,9 +5,11 @@ import CategoriesList from './CategoriesList';
 class Category extends PureComponent {
   constructor(props) {
     super(props);
+
     this.categoriesList = this.props.category.categories || [];
     this.id = this.props.category.id;
     this.name = this.props.category.name;
+
     this.onContentClick = this
       .onContentClick
       .bind(this);
@@ -82,6 +84,7 @@ class Category extends PureComponent {
           element="delete"
           id={this.id}
           label="Delete"
+          onClick={this.deleteCategory}
           type="link"
         />
 

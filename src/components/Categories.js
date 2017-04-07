@@ -7,6 +7,8 @@ class Categories extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.categoriesLength = 0;
+
     this.onTypeNewCategory = this
       .onTypeNewCategory
       .bind(this);
@@ -23,7 +25,9 @@ class Categories extends PureComponent {
       .onSubmit
       .bind(this);
 
-    this.categoriesLength = 0;
+    this.setNewCategory = this
+      .setNewCategory
+      .bind(this);
 
     this.state = {
       newCategoryName: ""
@@ -32,7 +36,6 @@ class Categories extends PureComponent {
 
   appendCategoriesLength(value) {
     this.categoriesLength += value;
-    // console.log('appendCategoriesLength', value, this.categoriesLength);
   }
 
   onTypeNewCategory(event) {
@@ -54,11 +57,19 @@ class Categories extends PureComponent {
       tasks: [],
     }
 
-    this
-      .props
-      .actions
-      .setNewCategory(newCategory);
+    this.setNewCategory(newCategory);
   }
+
+
+  setNewCategory(category) {
+    const newTodoList = {
+      'categories': [
+        category, ...this.props.todoList.categories
+      ]
+    }
+    this.props.actions.setTodoList(newTodoList);
+  }
+
 
   componentWillMount() {
     this.categoriesLength = 0;
