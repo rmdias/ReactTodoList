@@ -10,11 +10,17 @@ class Categories extends PureComponent {
 
     this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
     this.createNewCategory = this.createNewCategory.bind(this);
+    this.appendCategoriesLength = this.appendCategoriesLength.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
+    this.categoriesLength = 0;
     this.state = {
       newCategoryName: ""
     };
+  }
+
+  appendCategoriesLength(value) {
+    this.categoriesLength += value;
+    // console.log('appendCategoriesLength', value, this.categoriesLength);
   }
 
   onTypeNewCategory(event) {
@@ -25,22 +31,38 @@ class Categories extends PureComponent {
   }
 
   onSubmit(event) {
+    event.preventDefault();
     this.createNewCategory(this.state.newCategoryName);
   }
 
   createNewCategory(newCategoryName) {
 
     const newCategory = {
-      id: 4,
-      name: newCategoryName
+      id: this.categoriesLength,
+      name: newCategoryName,
+      tasks: [],
+      categories: []
     }
-
 
     this.props.actions.setNewCategory(newCategory);
   }
 
+  componentWillMount() {
+    this.categoriesLength = 0;
+    console.log('Mounting... ', 'Categories');
+  }
+  componentDidMount() {
+    console.log('Mounted... ', 'Categories');
+  }
+
   render() {
-  console.log('Rendering... ', 'Categories');
+  // console.log('Rendering... ', 'Categories');
+  this.categoriesLength=0;
+
+    const actions = {
+      appendCategoriesLength: this.appendCategoriesLength,
+      ...this.props.actions
+    };
 
     const block =
       <section className="categories">
@@ -67,7 +89,7 @@ class Categories extends PureComponent {
         <div className="categories__content">
           <h3 className="categories__title">Categories List</h3>
           <CategoriesList
-            actions={this.props.actions}
+            actions={actions}
             categories={this.props.categories}
             selectedCategory={this.props.selectedCategory}
             query={this.props.query}

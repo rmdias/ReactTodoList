@@ -32,7 +32,7 @@ class Category extends PureComponent {
 
 
   render() {
-  console.log('Rendering... ', 'Category');
+  // console.log('Rendering... ', 'Category');
 
     const category = this.props.category;
     const isSelected = category === this.props.selectedCategory;

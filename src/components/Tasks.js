@@ -5,42 +5,42 @@ import TasksList from './TasksList';
 
 
 class Tasks extends PureComponent {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-    // this.onTypeNewTask = this.onTypeNewTask.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    //
-    // this.state = {
-    //   newTaskDescription: ""
-    // };
-  // }
+    this.onTypeNewTask = this.onTypeNewTask.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      newTaskDescription: ""
+    };
+  }
 
 
-  //
-  // onTypeNewTask(event) {
-  //   const newTaskDescription= event.target.value
-  //   this.setState({
-  //     newTaskDescription: newTaskDescription
-  //   });
-  //   console.log('newTaskDescription',newTaskDescription);
-  // }
-  //
-  // handleSubmit(event) {
-  //   this.createNewTask(this.state.newTaskDescription);
-  // }
-  //
-  // createNewTask(name) {
-  //   console.log('Creating new category: ', name, this.props.todoList);
-  //
-  //   console.log(`Task ${name} was created`);
-  //   this.setState({
-  //     newTaskDescription: ""
-  //   });
-  // }
+
+  onTypeNewTask(event) {
+    const newTaskDescription= event.target.value
+    this.setState({
+      newTaskDescription: newTaskDescription
+    });
+    console.log('newTaskDescription',newTaskDescription);
+  }
+
+  handleSubmit(event) {
+    this.createNewTask(this.state.newTaskDescription);
+  }
+
+  createNewTask(name) {
+    console.log('Creating new category: ', name, this.props.todoList);
+
+    console.log(`Task ${name} was created`);
+    this.setState({
+      newTaskDescription: ""
+    });
+  }
 
   render() {
-  console.log('Rendering... ', 'Tasks');
+  // console.log('Rendering... ', 'Tasks');
 
     const block =
     <section className="tasks">

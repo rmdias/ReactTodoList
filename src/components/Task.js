@@ -39,7 +39,7 @@ class Task extends PureComponent {
   }
 
   render() {
-  console.log('Rendering... ', 'Task');
+  // console.log('Rendering... ', 'Task');
 
     const task = this.props.task;
 

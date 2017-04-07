@@ -28,12 +28,13 @@ class Search extends PureComponent {
     this.props.actions.search(inputValue);
   }
 
-  onSubmit() {
+  onSubmit(event) {
+    event.preventDefault();
     this.props.actions.search(this.state.query);
   }
 
   render() {
-  console.log('Rendering... ', 'Search');
+  // console.log('Rendering... ', 'Search');
 
     const block =
         <form onSubmit={this.onSubmit} className="search__form">

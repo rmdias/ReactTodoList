@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class FormButton extends Component {
   render() {
-  console.log('Rendering... ', 'FormButton');
+  // console.log('Rendering... ', 'FormButton');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemButton = `${bem}-button`;

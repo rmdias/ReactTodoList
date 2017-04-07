@@ -6,7 +6,7 @@ class TasksList extends Component {
     super(props);
     this.createTaks = this.createTaks.bind(this);
   }
-  
+
   shouldComponentUpdate() {
     return true;
   }
@@ -43,7 +43,7 @@ class TasksList extends Component {
   }
 
   render() {
-  console.log('Rendering... ', 'TasksList');
+  // console.log('Rendering... ', 'TasksList');
 
     var listTasks =  this.getFilteredTasks().map(this.createTaks);
 

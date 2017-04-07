@@ -35,7 +35,7 @@ class FormInput extends Component {
   }
 
   render() {
-  console.log('Rendering... ', 'FormInput');
+  // console.log('Rendering... ', 'FormInput');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemInput = `${bem}-input`;

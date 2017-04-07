@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class FormCheckbox extends Component {
 
   render() {
-  console.log('Rendering... ', 'FormCheckbox');
+  // console.log('Rendering... ', 'FormCheckbox');
 
     const bem = `${this.props.block}__${this.props.element}`;
     const bemCheckbox = `${bem}-checkbox`;

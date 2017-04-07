@@ -57,7 +57,7 @@ class TodoList extends Component {
   }
 
   setNewCategory(category) {
-    console.log('Creating new category', this.state.todoList)
+    console.log('TDL - setNewCategory', category)
     const newTodoList = {
       'categories': [category, ...this.state.todoList.categories]
     }

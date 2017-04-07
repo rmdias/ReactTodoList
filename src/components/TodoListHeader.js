@@ -13,7 +13,7 @@ class TodoListHeader extends PureComponent {
 
 
   render() {
-  console.log('Rendering... ', 'TodoListHeader');
+  // console.log('Rendering... ', 'TodoListHeader');
 
     const block =
       <header className="todo-list__header">

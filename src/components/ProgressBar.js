@@ -2,7 +2,7 @@ import React , { PureComponent }from 'react';
 
 class ProgressBar extends PureComponent {
   render() {
-  console.log('Rendering... ', 'ProgressBar');
+  // console.log('Rendering... ', 'ProgressBar');
 
     const block = <progress
       className="todo-list__progress"
