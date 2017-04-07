@@ -18,6 +18,7 @@ class TodoListContent extends PureComponent {
         query={this.props.query}
       />
     </div>;
+    
     return block;
   }
 }

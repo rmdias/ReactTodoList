@@ -80,8 +80,12 @@ class Categories extends PureComponent {
     const block = <section className="categories">
       <header className="categories__header">
         <h2 className="categories__title">Categories</h2>
-        <form action="" onSubmit={this.onSubmit} className="categories__create-form">
-          <h3 className="categories__sub-title">Create Category</h3>
+        <form
+          action=""
+          onSubmit={this.onSubmit}
+          className="categories__create-form">
+          <h3
+            className="categories__sub-title">Create Category</h3>
 
           <FormInput
             block="categories"
@@ -110,6 +114,7 @@ class Categories extends PureComponent {
         />
       </div>
     </section>;
+
     return block;
   }
 }

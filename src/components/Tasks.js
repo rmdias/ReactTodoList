@@ -71,6 +71,7 @@ class Tasks extends PureComponent {
         />
       </div>
     </section>;
+    
     return block;
   }
 }

@@ -14,7 +14,11 @@ class TasksList extends Component {
   }
 
   createTaks(task, index) {
-    const block = <Task actions={this.props.actions} task={task} key={task.id}/>
+    const block = <Task
+      actions={this.props.actions} 
+      task={task} 
+      key={task.id}/>
+
     return block;
   }
 
@@ -33,10 +37,12 @@ class TasksList extends Component {
         return tasks.filter(matchQuery);
       } else {
         console.log('Has no query');
+
         return tasks;
       }
     } else {
       console.log('No selected category');
+
       return [];
     }
   }
@@ -49,6 +55,7 @@ class TasksList extends Component {
       .map(this.createTaks);
 
     const block = <ul className="tasks__list">{listTasks}</ul>;
+
     return block;
   }
 }

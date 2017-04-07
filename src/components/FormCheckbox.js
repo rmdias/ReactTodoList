@@ -30,6 +30,7 @@ class FormCheckbox extends Component {
         </label>
       </span>
     );
+    
     return block;
   }
 }

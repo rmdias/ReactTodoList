@@ -28,6 +28,7 @@ class TodoListHeader extends PureComponent {
       />
 
     </header>;
+
     return block;
   }
 }

@@ -68,6 +68,7 @@ class FormInput extends Component {
 
       </span>
     );
+    
     return block;
   }
 }

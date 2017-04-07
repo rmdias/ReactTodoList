@@ -27,12 +27,13 @@ class CategoriesList extends PureComponent {
       query={this.props.query}
       selectedCategory={this.props.selectedCategory}
     />;
+    
     return block;
   }
 
   render() {
     const categories = this.props.categories;
-    
+
     this
       .props
       .actions
