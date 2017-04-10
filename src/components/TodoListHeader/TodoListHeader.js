@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
-import Search from './Search';
-import ProgressBar from './ProgressBar';
+import Search from '../Search/Search';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import './TodoListHeader.css';
 
 class TodoListHeader extends PureComponent {
   // constructor(props) {

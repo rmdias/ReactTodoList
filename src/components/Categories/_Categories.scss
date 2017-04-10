@@ -1,0 +1,63 @@
+@import "../../style/imports";
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $color-gray;
+
+  @include todo-list__section-header();
+
+  &__header {
+    border-bottom-color: $color-gray;
+  }
+
+  &__title {
+  }
+
+  &__create {
+  }
+
+  &__sub-title {
+  }
+
+  &__create {
+
+    &-form {
+    }
+
+    &-label {
+    }
+
+    &-input {
+    }
+
+    &-submit-button {
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+    width: 250px;
+    background-color: $color-light-gray;
+  }
+
+  &__title {
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    counter-reset: categories;
+
+    & & {
+      // display: none;
+      flex-basis: 100%;
+    }
+
+    & .category--selected & {
+      // display: flex;
+    }
+  }
+}

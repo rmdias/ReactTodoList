@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
-import FormButton from './FormButton';
-import CategoriesList from './CategoriesList';
+import FormButton from '../FormButton/FormButton';
+import CategoriesList from '../CategoriesList/CategoriesList';
+import './Category.css';
 
 class Category extends PureComponent {
   constructor(props) {
@@ -15,6 +17,8 @@ class Category extends PureComponent {
     this.onContentClick = this.onContentClick.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.onSet = this.onSet.bind(this);
+
+    console.log(this.props.actions);
   }
 
   calculateProgress(category) {
@@ -23,7 +27,12 @@ class Category extends PureComponent {
       .tasks
       .filter(onlyDone);
 
-    return {total: category.tasks.length, done: tasksDone.length,}
+    const progress = {
+      total: category.tasks.length,
+      done: tasksDone.length,
+    }
+
+    return progress;
   }
 
   onContentClick(event) {
@@ -33,10 +42,7 @@ class Category extends PureComponent {
       .contains('category__name-button');
 
     if (wasTitle) {
-      this
-        .props
-        .actions
-        .selectCategory(this.props.category);
+      this.props.actions.selectCategory(this.props.category);
     }
   }
 
@@ -66,7 +72,7 @@ class Category extends PureComponent {
 
     const categories = <CategoriesList
       actions={this.props.actions}
-      categories={this.categoriesList}
+      categories={this.props.actions.getCategories(category.id)}
       query={this.props.query}
       selectedCategory={this.props.selectedCategory}
     />;

@@ -1,0 +1,49 @@
+@import "../../style/imports";
+
+.search {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__title {
+  }
+
+  &__done {
+    display: none;
+
+    &-checkbox {
+    }
+
+    &-label {
+    }
+  }
+
+
+  &__query {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+
+    &-label {
+      display: none;
+    }
+
+    &-input {
+      flex-grow: 1;
+    }
+
+    &-submit-button {
+      display: none;
+    }
+
+    &-reset-button {
+      display: none;
+    }
+  }
+
+}

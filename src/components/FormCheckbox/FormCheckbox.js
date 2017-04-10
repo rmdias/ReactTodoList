@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './FormCheckbox.css';
 
 class FormCheckbox extends Component {
 
@@ -30,7 +31,7 @@ class FormCheckbox extends Component {
         </label>
       </span>
     );
-    
+
     return block;
   }
 }

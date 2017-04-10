@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
-import FormCheckbox from './FormCheckbox';
-import FormButton from './FormButton';
+import FormCheckbox from '../FormCheckbox/FormCheckbox';
+import FormButton from '../FormButton/FormButton';
+import './Task.css';
 
 class Task extends PureComponent {
   constructor(props) {
@@ -78,7 +79,7 @@ class Task extends PureComponent {
       />
 
     </li>;
-    
+
     return block;
   }
 }

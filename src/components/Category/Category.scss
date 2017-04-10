@@ -1,0 +1,53 @@
+@import "../../style/imports";
+
+.category {
+
+  & {
+    list-style-type: none;
+    counter-increment: categories;
+  }
+
+
+  &__content {
+    align-items: center;
+    border-bottom: 1px solid $color-gray;
+    display: flex;
+    height: 3em;
+    justify-content: flex-end;
+    padding: 0 1em;
+    cursor: pointer;
+
+    &::before {
+      content: counters(categories, ". ") ". ";
+      margin-right: 0.3em;
+    }
+
+    &:hover {
+      background-color: $color-light-gray;
+    }
+
+    .form__button--link:not(.category__name-button) {
+      visibility: hidden;
+      margin-left: 0.5em;
+    }
+
+    &:hover .form__button--link {
+      visibility: visible;
+    }
+  }
+
+  &__name-button {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+}
+
+.category {
+  &--selected {
+    @extend .category;
+  }
+
+  &--selected > &__content {
+    background-color: $color-gray;
+  }
+}

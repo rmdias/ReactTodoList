@@ -1,0 +1,43 @@
+@import "../../style/imports";
+
+.task {
+  align-items: center;
+  border-bottom: 1px solid $color-gray;
+  display: flex;
+  min-height: 3em;
+  justify-content: flex-end;
+  padding: 0 1em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-light-gray;
+  }
+
+  .form__button--link {
+    visibility: hidden;
+    margin-left: 0.5em;
+  }
+
+  &:hover .form__button--link {
+    visibility: visible;
+  }
+
+  &__description {
+    & {
+      flex-grow: 1;
+    }
+    &-checkbox {
+    }
+
+    &-label {
+      flex-grow: 1;
+    }
+  }
+
+
+  &__edit-button {
+  }
+
+  &__delete-button {
+  }
+}

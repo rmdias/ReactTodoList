@@ -1,0 +1,44 @@
+@import "../../style/imports";
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @include todo-list__section-header();
+
+  &__header {
+  }
+
+  &__title {
+  }
+
+  &__create {
+    &-label {
+    }
+
+    &-input {
+    }
+  }
+
+  &__sub-title {
+  }
+
+  &__create {
+
+  }
+
+  &__submit-button {
+  }
+
+  &__content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  &__title {
+  }
+
+  &__list {
+  }
+}

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
-import Category from './Category';
+import Category from '../Category/Category';
+import './CategoriesList.css';
 
 class CategoriesList extends PureComponent {
   constructor(props) {
@@ -13,9 +14,7 @@ class CategoriesList extends PureComponent {
   createCategory(category, index) {
     const isSelected = category === this.props.selectedCategory;
     const regularExpression = new RegExp(this.props.query, "i");
-    const matchQuery = category
-      .name
-      .match(regularExpression);
+    const matchQuery = category.name.match(regularExpression);
 
     const block = <Category
       actions={this.props.actions}
@@ -27,16 +26,14 @@ class CategoriesList extends PureComponent {
       query={this.props.query}
       selectedCategory={this.props.selectedCategory}
     />;
-    
+
     return block;
   }
 
   render() {
     const categories = this.props.categories;
 
-    this
-      .props
-      .actions
+    this.props.actions
       .appendCategoriesLength(categories.length);
 
     const categoriesList = categories.map(this.createCategory);

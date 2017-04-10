@@ -1,7 +1,9 @@
 import React, {PureComponent} from 'react';
-import FormCheckbox from './FormCheckbox';
-import FormInput from './FormInput';
-import FormButton from './FormButton';
+import FormCheckbox from '../FormCheckbox/FormCheckbox';
+import FormInput from '../FormInput/FormInput';
+import FormButton from '../FormButton/FormButton';
+import './Search.css';
+
 
 class Search extends PureComponent {
   constructor(props) {

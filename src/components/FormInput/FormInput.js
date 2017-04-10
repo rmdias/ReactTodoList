@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './FormInput.css';
 
 class FormInput extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class FormInput extends Component {
 
       </span>
     );
-    
+
     return block;
   }
 }

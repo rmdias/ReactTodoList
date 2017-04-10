@@ -1,0 +1,30 @@
+@mixin todo-list__section-header() {
+  &__header {
+    border-bottom: 1px solid $color-light-gray;
+  }
+
+  &__create {
+
+    &-form {
+      display: flex;
+    }
+
+    &-input-label {
+      display: none;
+    }
+
+    &-input {
+      flex-grow: 1;
+      display: flex;
+
+      &-input {
+        flex-grow: 1;
+        outline: none;
+      }
+    }
+
+    &-submit-button {
+      display: none;
+    }
+  }
+}
