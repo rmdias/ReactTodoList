@@ -26,11 +26,11 @@ class Task extends PureComponent {
 
   onChange(event) {
     this.setState({done: event.target.checked});
+
+    console.log('Task', this.props.task.description);
+    console.log('Status', event.target.checked);
     // const task = {...this.props.task, done: this.state.done};
-    this
-      .props
-      .actions
-      .setTask(this.props.task, this.state.done);
+    this.props.actions.setTask(this.props.task, this.state.done);
   }
 
   onContentClick(event) {
