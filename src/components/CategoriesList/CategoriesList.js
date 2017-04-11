@@ -33,9 +33,6 @@ class CategoriesList extends PureComponent {
   render() {
     const categories = this.props.categories;
 
-    this.props.actions
-      .appendCategoriesLength(categories.length);
-
     const categoriesList = categories.map(this.createCategory);
 
     const block = <ul className="categories__list">

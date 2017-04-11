@@ -63,6 +63,7 @@ class FormInput extends Component {
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
           placeholder={placeholder}
+          disabled={this.props.disabled}
           type='text'
           value={this.state.value}
         />

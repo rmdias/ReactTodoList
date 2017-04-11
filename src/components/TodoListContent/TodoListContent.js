@@ -91,10 +91,13 @@ class TodoListContent extends PureComponent {
     return nextId + 1;
   }
 
-
   categorySelect(id) {
+
+    const isSelected = (id) => id === this.state.selectedCategory;
+    const idToSelect = (id) => isSelected(id) ? null : id;
+
     this.setState({
-      selectedCategory: id
+      selectedCategory: idToSelect(id)
     });
   }
 

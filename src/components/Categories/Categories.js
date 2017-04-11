@@ -10,42 +10,82 @@ class Categories extends PureComponent {
     super(props);
 
     // Binding Methods
-    this.appendCategoriesLength = this.appendCategoriesLength.bind(this);
+    this.addCategory = this.addCategory.bind(this);
+    this.createNewCategory = this.createNewCategory.bind(this);
     this.getCategories = this.getCategories.bind(this);
-    // this.createNewCategory = this.createNewCategory.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
+    this.nextCategoryId = this.nextCategoryId.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
-    // this.setNewCategory = this.setNewCategory.bind(this);
-    // this.unsetCategory = this.unsetCategory.bind(this);
-    // this.editCategory = this.editCategory.bind(this);
-    // this.addSubCategory = this.addSubCategory.bind(this);
-
-    this.unsetCategory = this.unsetCategory.bind(this);
     this.setCategory = this.setCategory.bind(this);
-
-    // this.categoriesLength = 0;
+    this.unsetCategory = this.unsetCategory.bind(this);
 
     this.state = {
       newCategoryName: "",
     };
 
     this.actions = {
-      appendCategoriesLength: this.appendCategoriesLength,
+      addCategory: this.addCategory,
       getCategories: this.getCategories,
-      // unsetCategory: this.unsetCategory,
-      // editCategory: this.editCategory,
-      // addSubCategory: this.addSubCategory,
+      setCategory: this.setCategory,
+      unsetCategory: this.unsetCategory,
       ...this.props.actions
     };
+
   }
 
-  setCategory(item) {
-    this.actions.set('category', item);
+  /**
+  * Component actions
+  **/
+  createNewCategory(newCategoryName) {
+
+    const parentCategory = this.props.selectedCategory;
+
+    const newCategory = {
+      id: this.nextCategoryId(),
+      name: newCategoryName,
+      parent: !!parentCategory ? parentCategory.id : null,
+    }
+
+    this.addCategory(newCategory);
   }
 
-  unsetCategory(item) {
-    this.actions.unset('category', item);
+  /**
+  * Collection Management
+  **/
+
+  addCategory(task) {
+    this.props.actions.add('categories', task);
   }
+
+  setCategory(task) {
+    this.props.actions.set('categories', task);
+  }
+
+  nextCategoryId() {
+    return this.props.actions.nextId('categories');
+  }
+
+  unsetCategory(task) {
+    this.props.actions.unset('categories', task);
+  }
+
+  /**
+  * Event Handlers
+  **/
+
+  onTypeNewCategory(event) {
+    const newCategoryName = event.target.value
+    this.setState({newCategoryName: newCategoryName});
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.createNewCategory(this.state.newCategoryName);
+  }
+
+  /**
+  * Auxiliary methods
+  **/
 
   getCategories(parentId = null) {
       const categories = _.filter(this.props.categories, {
@@ -54,54 +94,6 @@ class Categories extends PureComponent {
 
       return categories;
   }
-
-  appendCategoriesLength(value) {
-    this.categoriesLength += value;
-  }
-
-  onTypeNewCategory(event) {
-    const newCategoryName = event.target.value
-    this.setState({newCategoryName: newCategoryName});
-  }
-  //
-  // onSubmit(event) {
-  //   event.preventDefault();
-  //   this.createNewCategory(this.state.newCategoryName);
-  // }
-  //
-  // createNewCategory(newCategoryName) {
-  //
-  //   const newCategory = {
-  //     categories: [],
-  //     id: this.categoriesLength,
-  //     name: newCategoryName,
-  //     tasks: [],
-  //   }
-  //
-  //   this.setNewCategory(newCategory);
-  // }
-  //
-  //
-  // setNewCategory(category) {
-  //   const newTodoList = {
-  //     'categories': [
-  //       category, ...this.props.todoList.categories
-  //     ]
-  //   }
-  //   this.props.actions.setTodoList(newTodoList);
-  // }
-  //
-  // unsetCategory(category) {
-  //   console.log('Unseting this category', category);
-  // }
-  //
-  // editCategory(category) {
-  //   console.log('Editing this category', category);
-  // }
-  //
-  // addSubCategory(category) {
-  //   console.log('Add a subcategory into this category', category);
-  // }
 
   render() {
     // console.log('Rendering... ', 'Categories');
