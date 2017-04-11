@@ -20,6 +20,9 @@ class Categories extends PureComponent {
     // this.editCategory = this.editCategory.bind(this);
     // this.addSubCategory = this.addSubCategory.bind(this);
 
+    this.unsetCategory = this.unsetCategory.bind(this);
+    this.setCategory = this.setCategory.bind(this);
+
     // this.categoriesLength = 0;
 
     this.state = {
@@ -34,6 +37,14 @@ class Categories extends PureComponent {
       // addSubCategory: this.addSubCategory,
       ...this.props.actions
     };
+  }
+
+  setCategory(item) {
+    this.actions.set('category', item);
+  }
+
+  unsetCategory(item) {
+    this.actions.unset('category', item);
   }
 
   getCategories(parentId = null) {

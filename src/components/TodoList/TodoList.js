@@ -8,37 +8,38 @@ class TodoList extends Component {
     super(props);
 
     this.search = this.search.bind(this);
-
-    this.set = this.set.bind(this);
-
+    
     this.state = {
       query: ""
     };
+
+    this.actions = {
+      search: this.search,
+      ...this.props.actions
+    };
   }
 
-  set(name, value) {
+  setProperty(name, value) {
     const property = {};
     property[name] = value;
     this.setState(property)
   }
 
   search(query) {
-    this.set('query', query);
+    this.setState({
+      query: query
+    });
   }
 
   render() {
-    const actions = {
-      search: this.search,
-      set: this.set,
-    }
 
     const block = <div className="todo-list">
       <TodoListHeader
-        actions={actions}
+        actions={this.actions}
       />
 
       <TodoListContent
-        actions={actions}
+        actions={this.actions}
         query={this.state.query}
       />
     </div>;

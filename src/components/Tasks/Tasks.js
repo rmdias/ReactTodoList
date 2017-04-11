@@ -9,37 +9,70 @@ class Tasks extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.getTasks = this.getTasks.bind(this);
+    this.getCategoryTasks = this.getCategoryTasks.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onTypeNewTask = this.onTypeNewTask.bind(this);
+    this.setTask = this.setTask.bind(this);
+    this.unsetTask = this.unsetTask.bind(this);
+    this.nextTaskId = this.nextTaskId.bind(this);
 
     this.state = {
       newTaskDescription: ""
     };
 
     this.actions = {
-      getTasks: this.getTasks,
+      getCategoryTasks: this.getCategoryTasks,
+      addTask: this.addTask,
+      setTask: this.setTask,
+      unsetTask: this.unsetTask,
       ...this.props.actions
     }
+  }
+
+
+  addTask(task) {
+    // console.log('Set task', task, this.props.actions);
+    this.props.actions.add('tasks', task);
+  }
+
+  setTask(task) {
+    // console.log('Set task', task, this.props.actions);
+    this.props.actions.set('tasks', task);
+  }
+
+  unsetTask(task) {
+    this.props.actions.unset('tasks', task);
+  }
+
+  nextTaskId() {
+    return this.props.actions.nextId('tasks');
   }
 
   onTypeNewTask(event) {
     const newTaskDescription = event.target.value
     this.setState({newTaskDescription: newTaskDescription});
-    console.log('newTaskDescription', newTaskDescription);
+    // console.log('newTaskDescription', newTaskDescription);
   }
 
   handleSubmit(event) {
     this.createNewTask(this.state.newTaskDescription);
   }
 
-  createNewTask(name) {
-    console.log('Creating new category: ', name, this.props.todoList);
-    console.log(`Task ${name} was created`);
-    this.setState({newTaskDescription: ""});
+  createNewTask(description) {
+    // console.log('Creating new category: ', description, this.props.selectedCategory);
+    console.log(`Task ${description} was created`);
+
+    var newTask = {
+      id: this.nextTaskId(),
+      done: false,
+      cat: this.props.selectedCategory.id,
+      description: description
+    }
+    
+    this.addTask(newTask);
   }
 
-  getTasks() {
+  getCategoryTasks() {
     const category = this.props.selectedCategory;
 
     if(!!category) {
@@ -48,14 +81,13 @@ class Tasks extends PureComponent {
     } else {
       return [];
     }
-
   }
 
 
 
   render() {
-    // console.log('Rendering... ', 'Tasks');
-    const tasks = this.getTasks();
+    // console.log('Rendering... ', 'Tasks', this.props.actions);
+    const tasks = this.getCategoryTasks();
     const block = <section className="tasks">
       <header className="tasks__header">
         <h2 className="tasks__title">Tasks</h2>
@@ -81,7 +113,7 @@ class Tasks extends PureComponent {
       <div className="tasks__content">
         <h3 className="tasks__title">Categories List</h3>
         <TasksList
-          actions={this.props.actions}
+          actions={this.actions}
           selectedCategory={this.props.selectedCategory}
           query={this.props.query}
           tasks={tasks}

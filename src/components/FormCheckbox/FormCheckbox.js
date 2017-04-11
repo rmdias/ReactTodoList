@@ -20,7 +20,7 @@ class FormCheckbox extends Component {
       <span className={bem}>
         <input
           className={`${bemCheckbox} form__input--checkbox`}
-          defaultChecked={this.props.checked}
+          checked={this.props.checked}
           id={checkboxId}
           onChange={this.props.onChange}
           type='checkbox'

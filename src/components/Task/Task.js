@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import FormCheckbox from '../FormCheckbox/FormCheckbox';
 import FormButton from '../FormButton/FormButton';
@@ -7,30 +8,46 @@ class Task extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onContentClick = this
-      .onContentClick
-      .bind(this);
-
-    this.onChange = this
-      .onChange
-      .bind(this);
+    this.onContentClick = this.onContentClick.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       done: this.props.task.done
     }
   }
 
-  shouldComponentUpdate() {
-    return false;
+  cloneTask() {
+    return _.clone(this.props.task);
+  }
+
+  setProperty(property, value) {
+
+    const newTask = this.cloneTask();
+    newTask[property] = value;
+
+    this.props.actions.setTask(newTask);
+  }
+
+  setDescription(newDescription) {
+    this.setProperty('description', newDescription);
+  }
+
+  setDone(newStatus) {
+    this.setProperty('done', newStatus);
   }
 
   onChange(event) {
     this.setState({done: event.target.checked});
 
-    console.log('Task', this.props.task.description);
-    console.log('Status', event.target.checked);
-    // const task = {...this.props.task, done: this.state.done};
-    this.props.actions.setTask(this.props.task, this.state.done);
+    const newTask = this.cloneTask(this.props.task);
+    newTask.done = event.target.checked;
+
+    this.setDone(event.target.checked);
+  }
+
+  onDelete() {
+    this.props.actions.unsetTask(this.props.task);
   }
 
   onContentClick(event) {
@@ -39,14 +56,16 @@ class Task extends PureComponent {
     const shouldChange = forbiddenTags.indexOf(tagName) === -1;
 
     if (shouldChange) {
+
       this.setState({
         done: !this.state.done
       });
+      this.setDone(!this.state.done);
     }
   }
 
   render() {
-    // console.log('Rendering... ', 'Task');
+    // console.log('Rendering task', this.props.actions);
 
     const task = this.props.task;
 
@@ -75,6 +94,7 @@ class Task extends PureComponent {
         element="delete"
         id={task.id}
         label="Delete"
+        onClick={this.onDelete}
         type="link"
       />
 

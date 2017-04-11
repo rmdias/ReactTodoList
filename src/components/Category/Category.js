@@ -17,8 +17,6 @@ class Category extends PureComponent {
     this.onContentClick = this.onContentClick.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.onSet = this.onSet.bind(this);
-
-    console.log(this.props.actions);
   }
 
   calculateProgress(category) {
@@ -42,7 +40,7 @@ class Category extends PureComponent {
       .contains('category__name-button');
 
     if (wasTitle) {
-      this.props.actions.selectCategory(this.props.category);
+      this.props.actions.categorySelect(this.props.category);
     }
   }
 
