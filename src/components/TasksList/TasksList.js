@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import Task from '../Task/Task';
 import './TasksList.css';
@@ -6,6 +7,8 @@ class TasksList extends Component {
   constructor(props) {
     super(props);
     this.createTaks = this.createTaks.bind(this);
+    this.tasks = this.tasks.bind(this);
+    this.filterTasksBySearch = this.filterTasksBySearch.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -22,35 +25,25 @@ class TasksList extends Component {
     return block;
   }
 
-  // getFilteredTasks() {
-  //   if (!!this.props.selectedCategory) {
-  //     const tasks = this.props.selectedCategory.tasks;
-  //
-  //     if (!!this.props.query) {
-  //       // console.log('Has query');
-  //
-  //       const re = new RegExp(this.props.query, "i");
-  //       const matchQuery = (task) => task
-  //         .description
-  //         .match(re);
-  //
-  //       return tasks.filter(matchQuery);
-  //     } else {
-  //       return tasks;
-  //     }
-  //   } else {
-  //     return [];
-  //   }
-  // }
+  tasks() {
+    const tasks = this.props.tasks;
+    const hasTasks = !!tasks.length;
+    const hasQuery = !!this.props.query;
+    const canFilter = hasTasks && hasQuery;
+    const lister = canFilter ? this.filterTasksBySearch : _.identity;
+
+    return lister(tasks);
+  }
+
+  filterTasksBySearch(taskList) {
+    const re = new RegExp(this.props.query, "i");
+    const matchQuery = (task) => task.description.match(re);
+    return _.filter(taskList, matchQuery);
+  }
 
   render() {
-    // console.log('Rendering... ', 'TasksList');
-
-    var listTasks = this.props.tasks.map(this.createTaks);
-      // .getFilteredTasks()
-
-    const block = <ul className="tasks__list">{listTasks}</ul>;
-
+    const tasksList = this.tasks().map(this.createTaks);
+    const block = <ul className="tasks__list">{tasksList}</ul>;
     return block;
   }
 }

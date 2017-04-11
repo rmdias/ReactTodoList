@@ -29,19 +29,13 @@ class Search extends PureComponent {
   onChange(event) {
     const inputValue = event.target.value;
 
-    this.setState({query: event.target.value});
-    this
-      .props
-      .actions
-      .search(inputValue);
+    this.setState({query: inputValue});
+    this.props.actions.search(inputValue);
   }
 
   onSubmit(event) {
     event.preventDefault();
-    this
-      .props
-      .actions
-      .search(this.state.query);
+    this.props.actions.search(this.state.query);
   }
 
   render() {

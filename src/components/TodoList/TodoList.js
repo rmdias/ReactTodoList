@@ -8,7 +8,7 @@ class TodoList extends Component {
     super(props);
 
     this.search = this.search.bind(this);
-    
+
     this.state = {
       query: ""
     };

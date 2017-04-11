@@ -102,7 +102,6 @@ class TodoListContent extends PureComponent {
   }
 
   render() {
-    // console.log('Rendering... ', 'TodoListContent');
     const block = <div className="todo-list__content">
       <Categories
         actions={this.actions}
