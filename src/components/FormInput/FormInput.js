@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './FormInput.css';
 
 class FormInput extends Component {
@@ -9,13 +9,15 @@ class FormInput extends Component {
       value: this.props.value || ""
     }
 
-    this.onKeyUp = this
-      .onKeyUp
-      .bind(this);
-    this.onChange = this
-      .onChange
-      .bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.focus = this.focus.bind(this);
   }
+
+  focus() {
+   // Explicitly focus the text input using the raw DOM API
+   this.textInput.focus();
+ }
 
   onChange(event) {
     const inputValue = event.target.value;
@@ -36,9 +38,11 @@ class FormInput extends Component {
     }
   }
 
-  render() {
-    // console.log('Rendering... ', 'FormInput');
+  componenteDidUpdate() {
+    console.log('Component updated')
+  }
 
+  render() {
     const bem = `${this.props.block}__${this.props.element}`;
     const bemInput = `${bem}-input`;
     const bemLabel = `${bem}-label`;
@@ -58,12 +62,14 @@ class FormInput extends Component {
           htmlFor={inputId}>{label}</label>
 
         <input
+          autoComplete="off"
           className={`${bemInput} form__input--text`}
+          disabled={this.props.disabled}
           id={inputId}
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
           placeholder={placeholder}
-          disabled={this.props.disabled}
+          ref={(input) => { this.textInput = input; }}
           type='text'
           value={this.state.value}
         />

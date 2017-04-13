@@ -11,12 +11,16 @@ class TodoListContent extends PureComponent {
 
     super(props);
 
-    this.setTodoList = this.setTodoList.bind(this);
-    this.categorySelect = this.categorySelect.bind(this);
-    this.unset = this.unset.bind(this);
-    this.set = this.set.bind(this);
     this.add = this.add.bind(this);
-    this.nextId = this.nextId.bind(this);
+    this.enterEditMode = this.enterEditMode.bind(this);
+    this.exitEditMode = this.exitEditMode.bind(this);
+    this.get = this.get.bind(this);
+    this.getNextId = this.getNextId.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
+    this.set = this.set.bind(this);
+    this.setTodoList = this.setTodoList.bind(this);
+    this.unset = this.unset.bind(this);
+    this.unsetMany = this.unsetMany.bind(this);
 
     const todoList = JSON.parse(localStorage.getItem('reactTodoList'))
     // localStorage.setItem('reactTodoList', JSON.stringify(TodoListData));
@@ -25,15 +29,22 @@ class TodoListContent extends PureComponent {
       todoList: todoList || TodoListData,
       // todoList: todoList,
       // todoList: TodoListData,
+      editMode: null,
       selectedCategory: null,
+      selectedTask: null,
     }
 
     this.actions = {
       add: this.add,
+      enterEditMode: this.enterEditMode,
+      exitEditMode: this.exitEditMode,
+      get: this.get,
+      getNextId: this.getNextId,
+      selectCategory: this.selectCategory,
+      selectedTask: this.selectedTask,
       set: this.set,
       unset: this.unset,
-      nextId: this.nextId,
-      categorySelect: this.categorySelect,
+      unsetMany: this.unsetMany,
       ...this.props.actions
     };
   }
@@ -49,17 +60,43 @@ class TodoListContent extends PureComponent {
     });
   }
 
-  unset(collection, item) {
-    // Copy todo list
-    const newTodoList = this.cloneTodoList();
+  unsetMutation(newTodoList, collection, items) {
+      // Tasks or Categories
+      const dirtyCollection = newTodoList[collection];
 
-    // Find element
-    // Remove element
-    newTodoList[collection] = _.reject(newTodoList[collection], {
-      id:item.id
+      // Remove element(s)
+      const ids = _.map(_.flatten([items]), 'id');
+      const hasId = (item) => _.indexOf(ids, item.id) !== -1;
+      const cleanColletion = _.reject(dirtyCollection, hasId);
+
+      // Mutate the new todo list
+      newTodoList[collection] = cleanColletion;
+
+      return newTodoList;
+  }
+
+  unset(collection, items) {
+    // Clone list
+    let newTodoList = this.cloneTodoList();
+
+    //Mutate List
+    newTodoList = this.unsetMutation(newTodoList, collection, items);
+
+    // Set mutated
+    this.setTodoList(newTodoList);
+  }
+
+  unsetMany(actions) {
+
+    // Clone list
+    let newTodoList = this.cloneTodoList();
+
+    //Mutate List many times
+    actions.forEach((action) => {
+      newTodoList = this.unsetMutation(newTodoList, action.collection, action.items);
     });
 
-    // Set new todo List
+    // Set the clone list
     this.setTodoList(newTodoList);
   }
 
@@ -86,12 +123,28 @@ class TodoListContent extends PureComponent {
     this.setTodoList(newTodoList);
   }
 
-  nextId(collection) {
+  get(collection, filter=[]) {
+    return _.filter(this.state.todoList[collection], filter);
+  }
+
+  getNextId(collection) {
     const nextId = _(this.state.todoList[collection]).map('id').max() || 0;
     return nextId + 1;
   }
 
-  categorySelect(id) {
+  enterEditMode(collection) {
+    this.setState({
+      editMode: collection
+    });
+  }
+
+  exitEditMode() {
+    this.setState({
+      editMode: null
+    });
+  }
+
+  selectCategory(id) {
 
     const isSelected = (id) => id === this.state.selectedCategory;
     const idToSelect = (id) => isSelected(id) ? null : id;
@@ -101,19 +154,30 @@ class TodoListContent extends PureComponent {
     });
   }
 
+  status() {
+    console.log(this.state.todoList.tasks.length, 'Tasks');
+    console.log(this.state.todoList.categories.length, 'Categories');
+    console.log('Edit mode', this.state.editMode || 'off');
+  }
+
   render() {
+
+    this.status();
+
     const block = <div className="todo-list__content">
       <Categories
         actions={this.actions}
         categories={this.state.todoList.categories}
+        editMode={this.state.editMode}
         selectedCategory={this.state.selectedCategory}
       />
 
       <Tasks
         actions={this.actions}
+        editMode={this.state.editMode}
+        query={this.props.query}
         selectedCategory={this.state.selectedCategory}
         tasks={this.state.todoList.tasks}
-        query={this.props.query}
       />
     </div>;
 

@@ -13,17 +13,17 @@ class Category extends PureComponent {
     this.name = this.props.category.name;
 
     // Binding Methods
-    this.onUnset = this.onUnset.bind(this);
+    this.onClickDelete = this.onClickDelete.bind(this);
     this.onContentClick = this.onContentClick.bind(this);
-    this.onEdit = this.onEdit.bind(this);
-    this.onSet = this.onSet.bind(this);
+    this.onClickEdit = this.onClickEdit.bind(this);
+    this.onClickAdd = this.onClickAdd.bind(this);
   }
 
   calculateProgress(category) {
     const onlyDone = (task, index) => task.done === true;
     const tasksDone = category
       .tasks
-      .filter(onlyDone);
+    .filter(onlyDone);
 
     const progress = {
       total: category.tasks.length,
@@ -37,23 +37,23 @@ class Category extends PureComponent {
     const wasTitle = event
       .target
       .classList
-      .contains('category__name-button');
+    .contains('category__name-button');
 
     if (wasTitle) {
-      this.props.actions.categorySelect(this.props.category);
+      this.props.actions.selectCategory(this.props.category);
     }
   }
 
-  onUnset(event) {
+  onClickDelete(event) {
     this.props.actions.unsetCategory(this.props.category);
   }
 
-  onEdit(event) {
+  onClickEdit(event) {
     this.props.actions.editCategory(this.props.category);
   }
 
-  onSet(event) {
-    this.props.actions.setSubCategory(this.props.category);
+  onClickAdd(event) {
+    this.props.actions.addSubCategory(this.props.category);
   }
 
   render() {
@@ -68,12 +68,12 @@ class Category extends PureComponent {
 
     // console.log('Done tasks', this.calculateProgress(category), category.tasks);
 
-    const categories = <CategoriesList
-      actions={this.props.actions}
-      categories={this.props.actions.getCategories(category.id)}
-      query={this.props.query}
-      selectedCategory={this.props.selectedCategory}
-    />;
+      const categories = <CategoriesList
+        actions={this.props.actions}
+        categories={this.props.actions.getCategories(category.id)}
+        query={this.props.query}
+        selectedCategory={this.props.selectedCategory}
+                         />;
 
     const block = <li className={categoryClassName}>
       <div className="category__content" onClick={this.onContentClick}>
@@ -93,7 +93,7 @@ class Category extends PureComponent {
           element="edit"
           id={this.id}
           label="Edit"
-          onClick={this.onEdit}
+          onClick={this.onClickEdit}
           type="link"
         />
 
@@ -103,7 +103,7 @@ class Category extends PureComponent {
           element="delete"
           id={this.id}
           label="Delete"
-          onClick={this.onUnset}
+          onClick={this.onClickDelete}
           type="link"
         />
 
@@ -113,7 +113,7 @@ class Category extends PureComponent {
           element="submit"
           id={this.id}
           label="Add"
-          onClick={this.onSet}
+          onClick={this.onClickAdd}
           type="link"
         />
 

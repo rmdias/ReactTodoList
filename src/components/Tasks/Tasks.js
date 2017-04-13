@@ -10,8 +10,8 @@ class Tasks extends PureComponent {
     super(props);
 
     this.addTask = this.addTask.bind(this);
-    this.getCategoryTasks = this.getCategoryTasks.bind(this);
-    this.nextTaskId = this.nextTaskId.bind(this);
+    this.getSelectedCategoryTasks = this.getSelectedCategoryTasks.bind(this);
+    this.getNextTaskId = this.getNextTaskId.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onTypeNewTask = this.onTypeNewTask.bind(this);
     this.setTask = this.setTask.bind(this);
@@ -22,7 +22,7 @@ class Tasks extends PureComponent {
     };
 
     this.actions = {
-      getCategoryTasks: this.getCategoryTasks,
+      getSelectedCategoryTasks: this.getSelectedCategoryTasks,
       addTask: this.addTask,
       setTask: this.setTask,
       unsetTask: this.unsetTask,
@@ -36,7 +36,7 @@ class Tasks extends PureComponent {
 
   createNewTask(description) {
     var newTask = {
-      id: this.nextTaskId(),
+      id: this.getNextTaskId(),
       done: false,
       cat: this.props.selectedCategory.id,
       description: description
@@ -61,8 +61,8 @@ class Tasks extends PureComponent {
 
   // Get the next id base on the max number found
   // PLUS one
-  nextTaskId() {
-    return this.props.actions.nextId('tasks');
+  getNextTaskId() {
+    return this.props.actions.getNextId('tasks');
   }
 
   // Removes the task from collection
@@ -80,26 +80,27 @@ class Tasks extends PureComponent {
   }
 
   onSubmit(event) {
+    event.preventDefault();
     this.createNewTask(this.state.newTaskDescription);
+    this.setState({newTaskDescription: ""});
   }
 
   /**
   * Auxiliary methods
   **/
 
-  getCategoryTasks() {
+  getSelectedCategoryTasks() {
     const category = this.props.selectedCategory;
 
     if(!!category) {
-      const tasks = _.filter(this.props.tasks, { cat: category.id });
-      return tasks;
+      return this.props.actions.get('tasks', ['cat', category.id]);
     } else {
       return [];
     }
   }
 
   render() {
-    const tasks = this.getCategoryTasks();
+    const tasks = this.getSelectedCategoryTasks();
     const block = <section className="tasks">
       <header className="tasks__header">
         <h2 className="tasks__title">Tasks</h2>
@@ -112,6 +113,7 @@ class Tasks extends PureComponent {
             onChange={this.onTypeNewTask}
             disabled={!this.props.selectedCategory}
             label="Add a new task"
+            value={this.state.newTaskDescription}
           />
 
           <FormButton

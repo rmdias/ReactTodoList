@@ -11,9 +11,13 @@ class Categories extends PureComponent {
 
     // Binding Methods
     this.addCategory = this.addCategory.bind(this);
+    this.addSubCategory = this.addSubCategory.bind(this);
     this.createNewCategory = this.createNewCategory.bind(this);
+    this.createNewCategory = this.createNewCategory.bind(this);
+    this.createNewCategoryUnderRoot = this.createNewCategoryUnderRoot.bind(this);
     this.getCategories = this.getCategories.bind(this);
-    this.nextCategoryId = this.nextCategoryId.bind(this);
+    this.getDescendants = this.getDescendants.bind(this);
+    this.getNextCategoryId = this.getNextCategoryId.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onTypeNewCategory = this.onTypeNewCategory.bind(this);
     this.setCategory = this.setCategory.bind(this);
@@ -25,6 +29,7 @@ class Categories extends PureComponent {
 
     this.actions = {
       addCategory: this.addCategory,
+      addSubCategory: this.addSubCategory,
       getCategories: this.getCategories,
       setCategory: this.setCategory,
       unsetCategory: this.unsetCategory,
@@ -36,37 +41,85 @@ class Categories extends PureComponent {
   /**
   * Component actions
   **/
-  createNewCategory(newCategoryName) {
-
-    const parentCategory = this.props.selectedCategory;
+  createNewCategory(newCategoryName, parentCategoryId = null) {
 
     const newCategory = {
-      id: this.nextCategoryId(),
+      id: this.getNextCategoryId(),
       name: newCategoryName,
-      parent: !!parentCategory ? parentCategory.id : null,
+      parent: parentCategoryId,
     }
 
     this.addCategory(newCategory);
+  }
+
+  createNewCategoryUnderRoot(newCategoryName) {
+    this.createNewCategory(newCategoryName)
   }
 
   /**
   * Collection Management
   **/
 
-  addCategory(task) {
-    this.props.actions.add('categories', task);
+  addSubCategory(category) {
+    this.props.actions.selectCategory(category);
+    this.props.actions.enterEditMode('categories');
+
+    const promptMessage = `Add new category under ${category.name}`;
+    const placeholderText = 'Category name';
+    const newCategoryName = prompt(promptMessage, placeholderText);
+    const isNameValid = newCategoryName !== null && !!newCategoryName.trim();
+
+    if(isNameValid) {
+      this.createNewCategory(newCategoryName, category.id);
+    }
+
+    this.props.actions.exitEditMode();
   }
 
-  setCategory(task) {
-    this.props.actions.set('categories', task);
+  addCategory(category) {
+    this.props.actions.add('categories', category);
   }
 
-  nextCategoryId() {
-    return this.props.actions.nextId('categories');
+  setCategory(category) {
+    this.props.actions.set('categories', category);
   }
 
-  unsetCategory(task) {
-    this.props.actions.unset('categories', task);
+  getNextCategoryId() {
+    return this.props.actions.getNextId('categories');
+  }
+
+  unsetCategory(category) {
+    const categories = this.getTree(category);
+    const tasksPredicate = (branch) => this.props.actions.get('tasks', ['cat', branch.id]);
+    const tasks = _.flatten(categories.map(tasksPredicate));
+
+    const unsetParams = [
+      {
+        collection: 'categories',
+        items: categories
+      },
+
+      {
+        collection: 'tasks',
+        items: tasks
+      }
+    ]
+
+    this.props.actions.unsetMany(unsetParams);
+  }
+
+
+  getDescendants(parent) {
+    const categories = this.props.categories;
+    const getChildren = (parent) => _.filter(categories, ['parent', parent.id]);
+    const children = getChildren(parent);
+    const grandChildren = _.flatMap(children, this.getDescendants);
+    return [...children, ...grandChildren];
+  }
+
+  getTree(root) {
+    const descendants = this.getDescendants(root);
+    return [root, ...descendants];
   }
 
   /**
@@ -80,7 +133,8 @@ class Categories extends PureComponent {
 
   onSubmit(event) {
     event.preventDefault();
-    this.createNewCategory(this.state.newCategoryName);
+    this.createNewCategoryUnderRoot(this.state.newCategoryName);
+    this.setState({newCategoryName: ""});
   }
 
   /**
